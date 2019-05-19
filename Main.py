@@ -37,9 +37,9 @@ def firsts(grammar):
     return firsts_sets
 
 
-def lasts(grammar, first):
+def lasts(grammar):
     lasts_sets = {}
-    firsts_sets = first
+    firsts_sets = firsts(grammar)
     for i in range(len(grammar)):
         lasts_sets.setdefault(grammar[i][0], set())
     temp = lasts_sets.pop(grammar[0][0])
@@ -95,6 +95,40 @@ def lasts(grammar, first):
     return lasts_sets
 
 
+def prediction(grammar):
+    first = firsts(grammar)
+    last = lasts(grammar)
+    predict = []
+    for i in range(len(grammar)):
+        for j in range(1,len(grammar[i])):
+            if grammar[i][j] == "0":
+                predict.append([grammar[i][0], last.get(grammar[i][0])])
+            elif grammar[i][j] not in first:
+                predict.append([grammar[i][0], {grammar[i][j]}])
+            else:
+                flag = True
+                temp_set = set()
+                for k in range(j, len(grammar[i])):
+                    if grammar[i][k] in first:
+                        temp = first.get(grammar[i][k]).copy()
+                        if "0" in temp:
+                            temp.remove("0")
+                            temp_set.update(temp)
+                        else:
+                            temp_set.update(temp)
+                            flag = False
+                            break
+                    else:
+                        temp_set.update({grammar[i][k]})
+                        flag = False
+                        break
+                if flag:
+                    temp_set.update(last.get(grammar[i][0]))
+                predict.append([grammar[i][0],temp_set])
+            break
+    return predict
+
+
 def read():
     f = open("Gramatica.txt", "r")
     grammars = []
@@ -114,4 +148,5 @@ def read():
 
 
 print(firsts(read()[0]))
-print(lasts(read()[0], firsts(read()[0])))
+print(lasts(read()[0]))
+print(prediction(read()[0]))
