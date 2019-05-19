@@ -1,6 +1,5 @@
 def firsts(grammar):
     firsts_sets = {}
-
     for i in range(len(grammar)):
         firsts_sets.setdefault(grammar[i][0], set())
     flag = True
@@ -38,8 +37,62 @@ def firsts(grammar):
     return firsts_sets
 
 
-def lasts():
-    print("fds")
+def lasts(grammar, first):
+    lasts_sets = {}
+    firsts_sets = first
+    for i in range(len(grammar)):
+        lasts_sets.setdefault(grammar[i][0], set())
+    temp = lasts_sets.pop(grammar[0][0])
+    temp2 = temp.union({"$"})
+    lasts_sets.setdefault(grammar[0][0], temp2)
+    flag = True
+    while flag:
+        flag = False
+        for i in range(len(grammar)):
+            for j in range(1, len(grammar[i])):
+                if grammar[i][j] in lasts_sets:
+                    if j < len(grammar[i])-1:
+                        flag2 = False
+                        for k in range(j+1, len(grammar[i])):
+                            flag2 = False
+                            if grammar[i][k] in lasts_sets:
+                                temp = lasts_sets.pop(grammar[i][j])
+                                temp2 = firsts_sets.get(grammar[i][k]).copy()
+                                if "0" in temp2:
+                                    temp2.remove("0")
+                                else:
+                                    flag2 = True
+                                temp3 = temp.union(temp2)
+                                if temp != temp3:
+                                    flag = True
+                                lasts_sets.setdefault(grammar[i][j], temp3)
+                                if flag2:
+                                    break
+                            else:
+                                temp = lasts_sets.pop(grammar[i][j])
+                                temp2 = temp.union({grammar[i][k]})
+                                if temp != temp2:
+                                    flag = True
+                                lasts_sets.setdefault(grammar[i][j], temp2)
+                                flag2 = True
+                                break
+                        if not flag2:
+                            if grammar[i][0] != grammar[i][j]:
+                                temp = lasts_sets.pop(grammar[i][j])
+                                temp2 = lasts_sets.get(grammar[i][0]).copy()
+                                temp3 = temp.union(temp2)
+                                lasts_sets.setdefault(grammar[i][j], temp3)
+                                if temp != temp3:
+                                    flag = True
+                    else:
+                        if grammar[i][0] != grammar[i][j]:
+                            temp = lasts_sets.pop(grammar[i][j])
+                            temp2 = lasts_sets.get(grammar[i][0]).copy()
+                            temp3 = temp.union(temp2)
+                            lasts_sets.setdefault(grammar[i][j], temp3)
+                            if temp != temp3:
+                                flag = True
+    return lasts_sets
 
 
 def read():
@@ -60,4 +113,5 @@ def read():
     return grammars
 
 
-firsts(read()[0])
+print(firsts(read()[0]))
+print(lasts(read()[0], firsts(read()[0])))
