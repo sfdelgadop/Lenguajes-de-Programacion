@@ -1,0 +1,21 @@
+S A uno B C
+S S dos
+A B C D
+A A tres
+A 0
+B D cuatro C tres
+B 0
+C cinco D B
+C 0
+D seis
+D 0
+
+A B uno A C
+A S dos
+S B C D
+S A tres
+S 0
+B D cuatro C tres
+C cinco D B
+C 0
+D seis
