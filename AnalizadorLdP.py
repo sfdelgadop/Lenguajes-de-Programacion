@@ -169,7 +169,7 @@ for i in range(len(cadenaIntermedia)):
 
         if len(str(cadenaIntermedia[i][j])) > 1:
 
-            Tokens.append(["<tk_string," + repr(str(cadenaIntermedia[i][j])) ,  str(i + 1) , str(
+            Tokens.append(["<", "tk_string", repr(str(cadenaIntermedia[i][j])),  str(i + 1), str(
                 j + 1 + dif) , ">"])  # Imprime la cadena con \t y \n https://docs.python.org/3/library/functions.html#repr
             dif = dif + len(str(cadenaIntermedia[i][j])) - 1
 
@@ -177,9 +177,9 @@ for i in range(len(cadenaIntermedia)):
             t = idPR(cadenaIntermedia[i], j) + dif
             if len(p[i][j + dif:t]) <= 32:
                 if p[i][j + dif:t] in set_keys:
-                    Tokens.append(["<" , str(p[i][j + dif:t]) , str(i + 1) , str(j + 1 + dif) , ">"])
+                    Tokens.append(["<", str(p[i][j + dif:t]), str(i + 1), str(j + 1 + dif), ">"])
                 else:
-                    Tokens.append(["<id" , str(p[i][j + dif:t]) , str(i + 1) , str(j + 1 + dif) , ">"])
+                    Tokens.append(["<", "id" , str(p[i][j + dif:t]) , str(i + 1) , str(j + 1 + dif) , ">"])
                     vars.add(p[i][j + dif:t])
                 j = t - 1 - dif
             else:
@@ -188,7 +188,7 @@ for i in range(len(cadenaIntermedia)):
 
         elif cadenaIntermedia[i][j] == "n" or cadenaIntermedia[i][j] == "m":
             t = num(cadenaIntermedia[i], j) + dif
-            Tokens.append(["<tk_num" , str(p[i][j + dif:t]) , str(i + 1) , str(j + 1 + dif) , ">"])
+            Tokens.append(["<", "tk_num" , str(p[i][j + dif:t]) , str(i + 1) , str(j + 1 + dif) , ">"])
             j = t - 1  # Modifique a t-1 para que leyera tokens entre numeros
 
         elif cadenaIntermedia[i][j] == "B":
@@ -198,24 +198,24 @@ for i in range(len(cadenaIntermedia)):
         elif cadenaIntermedia[i][j] != " ":
             if cadenaIntermedia[i][j] == "<":
                 if j + 1 < len(cadenaIntermedia[i]) and cadenaIntermedia[i][j + 1] == ">":
-                    Tokens.append(["<tk_diference" , str(i + 1) , str(j + 1 + dif) , ">"])
+                    Tokens.append(["<", "tk_diference" , str(i + 1) , str(j + 1 + dif) , ">"])
                     j = j + 1
                 elif j + 1 < len(cadenaIntermedia[i]) and cadenaIntermedia[i][j + 1] == "=":
-                    Tokens.append(["<tk_lesOrEqual" , str(i + 1) , str(j + 1 + dif) , ">"])
+                    Tokens.append(["<", "tk_lesOrEqual" , str(i + 1) , str(j + 1 + dif) , ">"])
                     j = j + 1
                 else:
-                    Tokens.append(["<tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
+                    Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
                         j + 1 + dif) , ">"])
 
             elif cadenaIntermedia[i][j] == "<":
                 if j + 1 < len(cadenaIntermedia[i]) and cadenaIntermedia[i][j + 1] == "=":
-                    Tokens.append(["<tk_" + "gtrOrEqual" , str(i + 1) , str(j + 1 + dif) , ">"])
+                    Tokens.append(["<", "tk_" + "gtrOrEqual" , str(i + 1) , str(j + 1 + dif) , ">"])
                     j = j + 1
                 else:
-                    Tokens.append(["<tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
+                    Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
                         j + 1 + dif) , ">"])
             else:
-                Tokens.append(["<tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
+                Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
                     j + 1 + dif) , ">"])  # Imprimiendo tokens usando el diccionario y sus valores de set_chars
 
         j += 1
