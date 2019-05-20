@@ -102,9 +102,9 @@ def prediction(grammar):
     for i in range(len(grammar)):
         for j in range(1,len(grammar[i])):
             if grammar[i][j] == "0":
-                predict.append([grammar[i][0], last.get(grammar[i][0])])
+                predict.append([grammar[i], last.get(grammar[i][0])])
             elif grammar[i][j] not in first:
-                predict.append([grammar[i][0], {grammar[i][j]}])
+                predict.append([grammar[i], {grammar[i][j]}])
             else:
                 flag = True
                 temp_set = set()
@@ -124,7 +124,7 @@ def prediction(grammar):
                         break
                 if flag:
                     temp_set.update(last.get(grammar[i][0]))
-                predict.append([grammar[i][0],temp_set])
+                predict.append([grammar[i],temp_set])
             break
     return predict
 
@@ -147,6 +147,38 @@ def read():
     return grammars
 
 
+def emparejar(tok):
+    global token
+    if token == tok:
+        token = lexicoNext
+    else:
+        print("Error Sintaxis")
+    print("dsa")
+
+
+def function(S):
+    flag = False
+    global predict
+    global first
+    global token
+    for i in range(len(predict)):
+        if predict[i][0][0] == S and token in predict[i][1]:
+            flag = True
+            rule = predict[i][0]
+            for j in range(1,len(rule)):
+                if rule[j] in first:
+                    function(rule[j])
+                else:
+                    emparejar(rule[j])
+            break
+    if not flag:
+        if "0" not in first.get(S):
+            print("Error Sintactico")
+
+
 print(firsts(read()[0]))
 print(lasts(read()[0]))
 print(prediction(read()[0]))
+first = firsts(read()[0])
+predict = prediction(read()[0])
+token = ()
