@@ -167,10 +167,10 @@ dif = 0
 for i in range(len(cadenaIntermedia)):
     while j < len(cadenaIntermedia[i]):
 
-        if len(str(cadenaIntermedia[i][j])) > 1:
+        if len(cadenaIntermedia[i][j]) > 1:
 
-            Tokens.append(["<", "tk_string", repr(str(cadenaIntermedia[i][j])),  str(i + 1), str(
-                j + 1 + dif) , ">"])  # Imprime la cadena con \t y \n https://docs.python.org/3/library/functions.html#repr
+            Tokens.append(["<", "tk_string", repr(cadenaIntermedia[i][j]), str(i + 1), str(
+                j + 1 + dif), ">"])  # Imprime la cadena con \t y \n https://docs.python.org/3/library/functions.html#repr
             dif = dif + len(str(cadenaIntermedia[i][j])) - 1
 
         elif cadenaIntermedia[i][j] == "c":

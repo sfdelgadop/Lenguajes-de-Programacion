@@ -149,36 +149,54 @@ def read():
 
 def emparejar(tok):
     global token
-    if token == tok:
-        token = lexicoNext
+    global Tokens
+    global Cut
+    if token[1] == tok:
+        print(tok)
+        token = Tokens.pop(0)
     else:
-        print("Error Sintaxis")
-    print("dsa")
+        print("Error de sintaxis se esperaba el símbolo " + str(token[1]) + " y se recibió " + str(tok))
+        Cut = True
 
 
 def function(S):
     flag = False
+    global Cut
     global predict
     global first
     global token
     for i in range(len(predict)):
-        if predict[i][0][0] == S and token in predict[i][1]:
+        if predict[i][0][0] == S and token[1] in predict[i][1]:
             flag = True
             rule = predict[i][0]
             for j in range(1,len(rule)):
+
+                if Cut:
+                    break
+
                 if rule[j] in first:
                     function(rule[j])
                 else:
                     emparejar(rule[j])
+
+                if Cut:
+                    break
             break
     if not flag:
         if "0" not in first.get(S):
-            print("Error Sintactico")
+            print("Error de sintaxis se esperaban los símbolos " + str(first.get(S)) + " y se recibió " + str(token[1]))
+            Cut = True
 
 
 print(firsts(read()[0]))
 print(lasts(read()[0]))
 print(prediction(read()[0]))
+Cut = False
 first = firsts(read()[0])
 predict = prediction(read()[0])
-token = ()
+Tokens = [["dasd", "a"], ["dsa","b"], ["dsa", "bas"], ["dsa", "b"], ["dasd", "$"]]
+token = Tokens.pop(0)
+function("A")
+if not Cut:
+    if token[1] != "$":
+        print("Error sintactico, se esperaba fin de cadena y se recibió " + str(token[1]))

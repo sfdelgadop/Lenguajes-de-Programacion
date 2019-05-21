@@ -1,3 +1,9 @@
+A a B C
+B b bas
+B big C boss
+C 0
+C c
+
 S A uno B C
 S S dos
 A B C D
