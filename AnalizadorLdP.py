@@ -216,7 +216,7 @@ for i in range(len(cadenaIntermedia)):
                         j + 1 + dif) , ">"])
             else:
                 Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
-                    j + 1 + dif) , ">"])  # Imprimiendo tokens usando el diccionario y sus valores de set_chars
+                    j + 1 + dif), ">"])  # Imprimiendo tokens usando el diccionario y sus valores de set_chars
 
         j += 1
 
@@ -224,7 +224,16 @@ for i in range(len(cadenaIntermedia)):
         break
     j = 0
     dif = 0
+
+while True:
+    well = True
+    for i in range(len(Tokens)):
+        if Tokens[i][1]== "tk_lbreak":
+            Tokens.pop(i)
+            well = False
+            break
+    if well:
+        break
 for i in range(len(Tokens)):
     print(Tokens[i])
-
-print(vars)
+#print(vars)
