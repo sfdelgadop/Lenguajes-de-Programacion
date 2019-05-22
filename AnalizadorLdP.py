@@ -7,9 +7,9 @@ f.close()
 
 Tokens = []
 
-set_keys = {'TRUE', 'FALSE', 'SI', 'NO', 'and', 'archivo', 'caso', 'const', 'constantes', 'desde', 'eval', 'fin', 'hasta', 
-            'inicio', 'lib', 'libext', 'matriz', 'mientras', 'not', 'or', 'paso', 'subrutina', 'programa', 'ref', 'registro',
-            'repetir', 'retorna', 'si', 'sino', 'tipos', 'var', 'variables', 'vector', 'imprimir', 'leer', 'numerico', 'sin', 
+set_keys = {'TRUE', 'FALSE', 'SI', 'NO', 'and', 'archivo', 'caso', 'const', 'constantes', 'desde', 'eval', 'fin','hasta',
+            'inicio', 'lib', 'libext', 'matriz', 'mientras', 'not', 'or', 'paso', 'subrutina', 'programa', 'ref','registro',
+            'repetir', 'retorna', 'si', 'sino', 'tipos', 'var', 'variables', 'vector', 'numerico', 'sin',
             'cos', 'sqrt', 'strlen', 'logico', 'cadena'}
 set_chars = {' ': 'blank', '.': 'dot', ',': 'comma', ':': 'colon', '=': 'assig', '(': 'opar', ')': 'cpar',
              '[': 'obracket', ']': 'cbracket', '{': 'okey', '}': 'ckey', '?': 'oquotation', '?': 'cquotation',
@@ -417,7 +417,7 @@ def emparejar(tok):
         print(tok)
         token = Tokens.pop(0)
     elif tok != "0":
-        print("Error de sintaxis se esperaba el símbolo " + str(token[1]) + " y se recibió " + str(tok))
+        print(str(token[len(token)-3]) + " " + str(token[len(token)-2]) + " Error sintactico, se Encontró " + str(tok) +" y se esperaba " + token[1])
         Cut = True
 
 
@@ -447,7 +447,7 @@ def function(S):
             break
     if not flag:
         if "0" not in first.get(S):
-            print("Error de sintaxis se esperaban los símbolos " + str(first.get(S)) + " y se recibió " + str(token[1]) + " " + S)
+            print(str(token[len(token)-3]) + " " + str(token[len(token)-2]) + " Error sintactico, se Encontró " + str(token[1]) + " y se esperaban " + str(first.get(S)))
             Cut = True
 
 
@@ -475,7 +475,7 @@ Tokens.append(["<", "$"])
 function("S")
 if not Cut:
     if token[1] != "$":
-        print("Error sintactico, se esperaba fin de cadena y se recibió " + str(token[1]))
+        print(str(token[len(token)-3]) + " " + str(token[len(token)-2]) + " Error sintactico, se Encontró " + str(token[1]) + " y se esperaba fin de cadena")
     else:
-        print("Analisís sintáctico satisfactorio")
+        print("El analisis sintactico ha finalizado exitosamente.")
 

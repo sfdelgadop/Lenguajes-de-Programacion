@@ -1,4 +1,4 @@
-S Programa Declaraciones inicio Sentencias fin Subrutinas
+S Programa Declaraciones inicio Sentencias fin Subrutinabase
 Programa programa id
 Programa 0
 Declaraciones Constantes PuntoyComa Declaraciones
@@ -10,13 +10,9 @@ PuntoyComa 0
 Identificador id Identificador2
 Identificador2 0
 Identificador2 tk_dot id
-Constantes const id tk_assig TiposConstantes Constantes2
-Constantes2 id tk_assig TiposConstantes Constantes2
+Constantes const id tk_assig Dato Constantes2
+Constantes2 id tk_assig Dato Constantes2
 Constantes2 0
-TiposConstantes id
-TiposConstantes numerico
-TiposConstantes logico
-TiposConstantes cadena
 EsNumero Identificador
 EsNumero tk_num
 EsNumero tk_sum tk_num
@@ -66,21 +62,24 @@ Variables2Fix ListaId tk_colon TipoDato Variables2
 Variables2Fix tk_assig Dato VariablesAux
 Tipos tipos id tk_colon TipoDato Tipos2
 Tipos2 id tk_colon TipoDato Tipos2
+Tipos2 0
 Estructura vector tk_obracket Dim1 tk_cbracket TipoDato
 Estructura matriz tk_obracket Dim tk_cbracket TipoDato
 Dim1 tk_mult
-Dim1 numerico
+Dim1 EsNumero
 Dim Dim1 tk_comma Dim2
 Dim2 Dim1 DimFix
 DimFix 0
 DimFix tk_comma Dim2
-Registro registro tk_okey Variables tk_ckey
+Registro registro tk_okey Tipos2 tk_ckey
 Sentencias SolucionExpress Sentencias
 Sentencias EstructuraControl Sentencias
 Sentencias 0
 SolucionExpress id SolucionExpress2
 SolucionExpress2 tk_opar Parametros tk_cpar
-SolucionExpress2 tk_assig Dato
+SolucionExpress2 tk_assig Dato SolucionExpress3
+SolucionExpress3 Operador Dato SolucionExpress3
+SolucionExpress3 0
 Parametros Identificador ListaParametros
 Parametros Dato ListaParametros
 Parametros LlamadoFuncion ListaParametros
@@ -95,21 +94,21 @@ EstructuraControl Mientras
 EstructuraControl RepetirHasta
 EstructuraControl Desde
 EstructuraControl Eval
-If si tk_opar Condicion tk_cpar tk_okey Sentencias Aux
+If si tk_opar ExpresionLogica tk_cpar tk_okey Sentencias Aux
 Aux sino Aux2
 Aux2 Sentencias tk_ckey
 Aux2 si Sentencias Aux3
 Aux3 Aux
 Aux3 Sino tk_ckey
-Mientras mientras tk_opar Condicion tk_cpar tk_okey Sentencias tk_ckey
-RepetirHasta repetir Sentencias hasta tk_opar Condicion tk_cpar
+Mientras mientras tk_opar ExpresionLogica tk_cpar tk_okey Sentencias tk_ckey
+RepetirHasta repetir Sentencias hasta tk_opar ExpresionLogica tk_cpar
 Desde desde id tk_assig EsNumero hasta EsNumero Paso tk_okey Sentencias tk_ckey
 Paso paso EsNumero
 Paso 0
 Eval eval tk_okey Casos Sino tk_ckey
-Casos caso tk_opar Condicion tk_cpar Sentencias Casos
+Casos caso tk_opar ExpresionLogica tk_cpar Sentencias Casos
 Casos 0
-Sino sino tk_opar Condicion tk_cpar Sentencias
+Sino sino tk_opar ExpresionLogica tk_cpar Sentencias
 Sino 0
 ExpresionLogica tk_logico ExpresionLogica2
 ExpresionLogica id ExpresionLogica2

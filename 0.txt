@@ -1,14 +1,29 @@
 // Comentario
+tipos
+    LEXEMA : numerico
+
 var
     n, suma, k : numerico
+    re, sad, das : cadena
+const
+    h = 3
+    hh = 4
 
 inicio
     imprimir ("Suma pares hasta n.",' Ingrese n: ')
     leer (n)
     suma = 0.0
-    desde k=2 hasta n paso 2 TRUE ...
+    suma = 2 + 2 + b + c
+    desde k=2 hasta n paso 2
     {
         suma = suma + k
     }
     imprimir ("La suma es ", suma)
 fin
+
+subrutina asd() retorna x
+inicio
+    
+retorna(x)
+fin
+
