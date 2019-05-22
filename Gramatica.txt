@@ -1,6 +1,6 @@
 A a B C
 B b bas
-B big C boss
+B bas C boss
 C 0
 C c
 
