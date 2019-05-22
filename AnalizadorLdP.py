@@ -225,6 +225,17 @@ for i in range(len(cadenaIntermedia)):
                 else:
                     Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
                         j + 1 + dif), ">"])
+            elif cadenaIntermedia[i][j] == ".":
+                if j + 1 < len(cadenaIntermedia[i]) and cadenaIntermedia[i][j + 1] == ".":
+                    if j + 2 < len(cadenaIntermedia[i]) and cadenaIntermedia[i][j + 2] == ".":
+                        Tokens.append(["<", "tk_3dot", str(i + 1), str(j + 1 + dif), ">"])
+                        j = j + 2
+                    else:
+                        Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]), str(i + 1), str(
+                            j + 1 + dif), ">"])
+                else:
+                    Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
+                        j + 1 + dif), ">"])
             else:
                 Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
                     j + 1 + dif), ">"])  # Imprimiendo tokens usando el diccionario y sus valores de set_chars
