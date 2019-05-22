@@ -41,7 +41,7 @@ Operador tk_module
 Operador tk_exp
 OperacionMatematica tk_opar OperacionMatematica tk_cpar OperacionMatematica2
 OperacionMatematica EsNumero OperacionMatematica2
-OperacionMatematica Funcion OperacionMatematica2
+OperacionMatematica LlamadoFuncion OperacionMatematica2
 OperacionMatematica2 Operador OperacionMatematica
 OperacionMatematica2 0
 TipoDato numerico
@@ -108,7 +108,7 @@ Sino 0
 ExpresionLogica tk_logico ExpresionLogica2
 ExpresionLogica id ExpresionLogica2
 ExpresionLogica not ExpresionLogica ExpresionLogica2
-ExpresionLogica Funcion ExpresionLogica2
+ExpresionLogica LlamadoFuncion ExpresionLogica2
 ExpresionLogica Comparacion ExpresionLogica2
 ExpresionLogica tk_opar ExpresionLogica tk_cpar ExpresionLogica2
 ExpresionLogica2 and ExpresionLogica
@@ -129,7 +129,7 @@ Subrutinabase Metodo
 Subrutinabase Funcion
 Subrutinabase 0
 Metodo subrutina id tk_opar ParametrosSubrutina tk_cpar Declaraciones inicio Sentencias fin Subrutinabase
-Funcion subrutina id tk_opar ParametrosSubrutina tk_cpar retorna tk_opar id tk_cpar fin Subrutinabase
+Funcion subrutina id tk_opar ParametrosSubrutina tk_cpar retorna id Declaraciones inicio Sentencias retorna tk_opar id tk_cpar fin Subrutinabase
 ParametrosSubrutina 0
 ParametrosSubrutina Identificador tk_colon TipoDato ListaParametrosSubrutina
 ParametrosSubrutina ref Identificador tk_colon TipoDato ListaParametrosSubrutina
