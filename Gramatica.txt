@@ -75,10 +75,11 @@ Dim2 Dim1 DimFix
 DimFix 0
 DimFix tk_comma Dim2
 Registro registro tk_okey Variables tk_ckey
-Sentencias LlamadoFuncion Sentencias
-Sentencias Asignacion Sentencias
+Sentencias SolucionExpress Sentencias
 Sentencias EstructuraControl Sentencias
 Sentencias 0
+SolucionExpress id SolucionExpress2
+SolucionExpress2 tk_opar Parametros tk_cpar tk_assig Dato
 LlamadoFuncion id tk_opar Parametros tk_cpar
 Parametros Identificador ListaParametros
 Parametros Dato ListaParametros
