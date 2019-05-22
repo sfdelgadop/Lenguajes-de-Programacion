@@ -125,11 +125,12 @@ OperadorComparacion tk_less
 OperadorComparacion tk_bigger
 OperadorComparacion tk_equal
 OperadorComparacion tk_difference
-Subrutinabase Metodo
-Subrutinabase Funcion
+Subrutinabase subrutina id tk_opar ParametrosSubrutina tk_cpar Subrutinabase2
 Subrutinabase 0
-Metodo subrutina id tk_opar ParametrosSubrutina tk_cpar Declaraciones inicio Sentencias fin Subrutinabase
-Funcion subrutina id tk_opar ParametrosSubrutina tk_cpar retorna id Declaraciones inicio Sentencias retorna tk_opar id tk_cpar fin Subrutinabase
+Subrutinabase2 Metodo
+Subrutinabase2 Funcion
+Metodo Declaraciones inicio Sentencias fin Subrutinabase
+Funcion retorna id Declaraciones inicio Sentencias retorna tk_opar id tk_cpar fin Subrutinabase
 ParametrosSubrutina 0
 ParametrosSubrutina Identificador tk_colon TipoDato ListaParametrosSubrutina
 ParametrosSubrutina ref Identificador tk_colon TipoDato ListaParametrosSubrutina
