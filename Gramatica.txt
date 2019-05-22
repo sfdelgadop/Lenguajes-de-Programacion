@@ -84,10 +84,11 @@ Parametros Identificador ListaParametros
 Parametros Dato ListaParametros
 Parametros LlamadoFuncion ListaParametros
 Parametros 0
-ListaParametros tk_comma Identificador ListaParametros
-ListaParametros tk_comma Dato ListaParametros
-ListaParametros tk_comma LlamadoFuncion ListaParametros
+ListaParametros tk_comma ListaParametros2
 ListaParametros 0
+ListaParametros2 Identificador ListaParametros
+ListaParametros2 Dato ListaParametros
+ListaParametros2 LlamadoFuncion ListaParametros
 Asignacion Identificador tk_assig Dato
 EstructuraControl If Mientras RepetirHasta Desde Eval
 If si tk_opar Condicion tk_cpar tk_okey Sentencias Aux
