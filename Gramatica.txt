@@ -61,6 +61,7 @@ VariablesAux id VariablesFix
 VariablesFix ListaId tk_colon TipoDato Variables2
 VariablesFix tk_assig Dato Variables2
 Variables2 id Variables2Fix
+Variables2 0
 Variables2Fix ListaId tk_colon TipoDato Variables2
 Variables2Fix tk_assig Dato VariablesAux
 Tipos tipos id tk_colon TipoDato Tipos2
