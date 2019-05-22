@@ -54,7 +54,7 @@ VariantesIgualdad tk_colon
 VariantesIgualdad tk_assig
 ListaId tk_comma id ListaId
 ListaId 0
-Variables Var VariablesFix
+Variables Var VariablesAux
 Var var
 Var variables
 VariablesAux id VariablesFix
