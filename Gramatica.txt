@@ -1,27 +1,148 @@
-A a B C
-B b bas
-B bas C boss
-C 0
-C c
-
-S A uno B C
-S S dos
-A B C D
-A A tres
-A 0
-B D cuatro C tres
-B 0
-C cinco D B
-C 0
-D seis
-D 0
-
-A B uno A C
-A S dos
-S B C D
-S A tres
-S 0
-B D cuatro C tres
-C cinco D B
-C 0
-D seis
+S Programa Declaraciones inicio Sentencias fin Subrutinas
+Programa programa id
+Programa 0
+Declaraciones Constantes PuntoyComa Declaraciones
+Declaraciones Tipos PuntoyComa Declaraciones
+Declaraciones Variables PuntoyComa Declaraciones
+Declaraciones 0
+PuntoyComa tk_semicolon
+PuntoyComa 0
+Identificador id Identificador2
+Identificador2 0
+Identificador2 tk_dot id
+Constantes const id tk_assig TiposConstantes Constantes2
+Constantes2 id tk_assig TiposConstantes Constantes2
+Constantes2 0
+TiposConstantes id
+TiposConstantes numerico
+TiposConstantes logico
+TiposConstantes cadena
+EsNumero Identificador
+EsNumero tk_num
+EsNumero tk_sum tk_num
+EsNumero OperacionMatematica
+EsNumero LlamadoFuncion
+Dato tk_string Dato2
+Dato EsNumero
+Dato logico
+Dato Estructura
+Dato Registro
+Dato2 0
+Dato2 tk_sum
+Dato2 CadenaRecursiva
+CadenaRecursiva tk_string CadenaRecursiva2
+CadenaRecursiva2 0
+CadenaRecursiva2 tk_sum CadenaRecursiva
+Operador tk_sum
+Operador tk_subt
+Operador tk_mult
+Operador tk_div
+Operador tk_module
+Operador tk_exp
+OperacionMatematica tk_opar OperacionMatematica tk_cpar OperacionMatematica2
+OperacionMatematica EsNumero OperacionMatematica2
+OperacionMatematica Funcion OperacionMatematica2
+OperacionMatematica2 Operador OperacionMatematica
+OperacionMatematica2 0
+TipoDato numerico
+TipoDato cadena
+TipoDato logico
+TipoDato id
+TipoDato Estructura
+TipoDato Registro
+VariantesIgualdad tk_colon
+VariantesIgualdad tk_assig
+ListaId tk_comma id ListaId
+ListaId 0
+Variables Var VariablesFix
+Var var
+Var variables
+VariablesAux id VariablesFix
+VariablesFix ListaId tk_colon TipoDato Variables2
+VariablesFix tk_assig Dato Variables2
+Variables2 id Variables2Fix
+Variables2Fix ListaId tk_colon TipoDato Variables2
+Variables2Fix tk_assig Dato VariablesAux
+Tipos tipos id tk_colon TipoDato Tipos2
+Tipos2 id tk_colon TipoDato Tipos2
+Estructura vector tk_obracket Dim1 tk_cbracket TipoDato
+Estructura matriz tk_obracket Dim tk_cbracket TipoDato
+Dim1 tk_mult
+Dim1 numerico
+Dim Dim1 tk_comma Dim2
+Dim2 Dim1 DimFix
+DimFix 0
+DimFix tk_comma Dim2
+Registro registro tk_okey Variables tk_ckey
+Sentencias LlamadoFuncion Sentencias
+Sentencias Asignacion Sentencias
+Sentencias EstructuraControl Sentencias
+Sentencias 0
+LlamadoFuncion id tk_opar Parametros tk_cpar
+Parametros Identificador ListaParametros
+Parametros Dato ListaParametros
+Parametros LlamadoFuncion ListaParametros
+Parametros 0
+ListaParametros tk_comma Identificador ListaParametros
+ListaParametros tk_comma Dato ListaParametros
+ListaParametros tk_comma LlamadoFuncion ListaParametros
+ListaParametros 0
+Asignacion Identificador tk_assig Dato
+EstructuraControl If Mientras RepetirHasta Desde Eval
+If si tk_opar Condicion tk_cpar tk_okey Sentencias Aux
+Aux sino Aux2
+Aux2 Sentencias tk_ckey
+Aux2 si Sentencias Aux3
+Aux3 Aux
+Aux3 Sino tk_ckey
+Mientras mientras tk_opar Condicion tk_cpar tk_okey Sentencias tk_ckey
+RepetirHasta repetir Sentencias hasta tk_opar Condicion tk_cpar
+Desde desde id tk_assig EsNumero hasta EsNumero Paso tk_okey Sentencias tk_ckey
+Paso paso EsNumero
+Paso 0
+Eval eval tk_okey Casos Sino tk_ckey
+Casos caso tk_opar Condicion tk_cpar Sentencias Casos
+Casos 0
+Sino sino tk_opar Condicion tk_cpar Sentencias
+Sino 0
+ExpresionLogica tk_logico ExpresionLogica2
+ExpresionLogica id ExpresionLogica2
+ExpresionLogica not ExpresionLogica ExpresionLogica2
+ExpresionLogica Funcion ExpresionLogica2
+ExpresionLogica Comparacion ExpresionLogica2
+ExpresionLogica tk_opar ExpresionLogica tk_cpar ExpresionLogica2
+ExpresionLogica2 and ExpresionLogica
+ExpresionLogica2 or ExpresionLogica
+ExpresionLogica2 0
+Comparacion ValoresComparacion OperadorComparacion ValoresComparacion
+ValoresComparacion id
+ValoresComparacion tk_num
+ValoresComparacion tk_logico
+ValoresComparacion tk_string
+OperadorComparacion tk_gtrOrEqual
+OperadorComparacion tk_lesOrEqual
+OperadorComparacion tk_less
+OperadorComparacion tk_bigger
+OperadorComparacion tk_equal
+OperadorComparacion tk_difference
+Subrutinabase Metodo
+Subrutinabase Funcion
+Subrutinabase 0
+Metodo subrutina id tk_opar ParametrosSubrutina tk_cpar Declaraciones inicio Sentencias fin Subrutinabase
+Funcion subrutina id tk_opar ParametrosSubrutina tk_cpar retorna tk_opar id tk_cpar fin Subrutinabase
+ParametrosSubrutina 0
+ParametrosSubrutina Identificador tk_colon TipoDato ListaParametrosSubrutina
+ParametrosSubrutina ref Identificador tk_colon TipoDato ListaParametrosSubrutina
+ListaParametrosSubrutina 
+ListaParametrosSubrutina Identificador tk_colon TipoDato ListaParametrosSubrutina
+VectorInit tk_okey ValoresVector tk_ckey
+ValoresVector Dato ListaDatos
+ValoresVector tk_comma tk_3dot
+ValoresVector 0
+ListaDatos 0
+ListaDatos tk_comma Dato ListaDatos
+MatrizInit tk_okey VectorInit ListaVector tk_ckey
+ListaVector tk_comma ListaVector2
+ListaVector 0
+ListaVector2 VectorInit ListaVector tk_3dot
+ListaMatrices tk_comma MatrizInit ListaMatrices
