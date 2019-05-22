@@ -80,7 +80,9 @@ Sentencias EstructuraControl Sentencias
 Sentencias 0
 SolucionExpress id SolucionExpress2
 SolucionExpress2 tk_opar Parametros tk_cpar
-SolucionExpress2 tk_assig Dato
+SolucionExpress2 tk_assig Dato SolucionExpress3
+SolucionExpress3 tk_sum Dato
+SolucionExpress3 0
 Parametros Identificador ListaParametros
 Parametros Dato ListaParametros
 Parametros LlamadoFuncion ListaParametros
