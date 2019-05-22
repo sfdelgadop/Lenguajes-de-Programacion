@@ -80,7 +80,6 @@ Sentencias EstructuraControl Sentencias
 Sentencias 0
 SolucionExpress id SolucionExpress2
 SolucionExpress2 tk_opar Parametros tk_cpar tk_assig Dato
-LlamadoFuncion id tk_opar Parametros tk_cpar
 Parametros Identificador ListaParametros
 Parametros Dato ListaParametros
 Parametros LlamadoFuncion ListaParametros
@@ -90,7 +89,6 @@ ListaParametros 0
 ListaParametros2 Identificador ListaParametros
 ListaParametros2 Dato ListaParametros
 ListaParametros2 LlamadoFuncion ListaParametros
-Asignacion Identificador tk_assig Dato
 EstructuraControl If Mientras RepetirHasta Desde Eval
 If si tk_opar Condicion tk_cpar tk_okey Sentencias Aux
 Aux sino Aux2
