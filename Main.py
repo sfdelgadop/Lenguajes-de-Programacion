@@ -184,7 +184,7 @@ def function(S):
             break
     if not flag:
         if "0" not in first.get(S):
-            print("Error de sintaxis se esperaban los símbolos " + str(first.get(S)) + " y se recibió " + str(token[1]))
+            print("Error de sintaxis se esperaban los símbolos " + str(first.get(S)) + " y se recibió " + str(token[1])+ " " + S)
             Cut = True
 
 

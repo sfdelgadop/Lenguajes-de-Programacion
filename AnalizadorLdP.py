@@ -1,4 +1,4 @@
-f = open("0.txt", "r")
+f = open("6.txt", "r")
 p = []
 for x in f:
     p.append(x)
@@ -416,7 +416,7 @@ def emparejar(tok):
     if token[1] == tok:
         print(tok)
         token = Tokens.pop(0)
-    else:
+    elif tok != "0":
         print("Error de sintaxis se esperaba el símbolo " + str(token[1]) + " y se recibió " + str(tok))
         Cut = True
 
@@ -431,7 +431,7 @@ def function(S):
         if predict[i][0][0] == S and token[1] in predict[i][1]:
             flag = True
             rule = predict[i][0]
-            for j in range(1,len(rule)):
+            for j in range(1, len(rule)):
 
                 if Cut:
                     break
@@ -446,7 +446,7 @@ def function(S):
             break
     if not flag:
         if "0" not in first.get(S):
-            print("Error de sintaxis se esperaban los símbolos " + str(first.get(S)) + " y se recibió " + str(token[1]))
+            print("Error de sintaxis se esperaban los símbolos " + str(first.get(S)) + " y se recibió " + str(token[1]) + " " + S)
             Cut = True
 
 
@@ -458,7 +458,20 @@ first = firsts(read()[0])
 predict = prediction(read()[0])
 #Tokens = [["dasd", "a"], ["dsa","b"], ["dsa", "bas"], ["dsa", "b"], ["dasd", "$"]]
 token = Tokens.pop(0)
-function("A")
+Tokens.append(["<", "$"])
+function("S")
 if not Cut:
     if token[1] != "$":
         print("Error sintactico, se esperaba fin de cadena y se recibió " + str(token[1]))
+    else:
+        print("Analisís sintáctico satisfactorio")
+
+symbol = predict[0][0][0]
+setTemp = predict[0][1]
+for i in range(1,len(predict)):
+    if predict[i][0][0] == symbol:
+        if not setTemp.isdisjoint(predict[i][1]):
+            print("ambiguedad en el símbolo" + str(symbol))
+    else:
+        symbol = predict[i][0][0]
+        setTemp = predict[i][1]
