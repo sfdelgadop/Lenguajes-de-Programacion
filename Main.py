@@ -200,3 +200,15 @@ function("A")
 if not Cut:
     if token[1] != "$":
         print("Error sintactico, se esperaba fin de cadena y se recibió " + str(token[1]))
+    else:
+        print("Analisís sintáctico satisfactorio")
+
+symbol = predict[0][0][0]
+setTemp = predict[0][1]
+for i in range(1,len(predict)):
+    if predict[i][0][0] == symbol:
+        if not setTemp.isdisjoint(predict[i][1]):
+            print("ambiguedad en el símbolo" + str(symbol))
+    else:
+        symbol = predict[i][0][0]
+        setTemp = predict[i][1]
