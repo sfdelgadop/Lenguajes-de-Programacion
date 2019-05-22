@@ -90,7 +90,11 @@ ListaParametros 0
 ListaParametros2 Identificador ListaParametros
 ListaParametros2 Dato ListaParametros
 ListaParametros2 LlamadoFuncion ListaParametros
-EstructuraControl If Mientras RepetirHasta Desde Eval
+EstructuraControl If 
+EstructuraControl Mientras
+EstructuraControl RepetirHasta
+EstructuraControl Desde
+EstructuraControl Eval
 If si tk_opar Condicion tk_cpar tk_okey Sentencias Aux
 Aux sino Aux2
 Aux2 Sentencias tk_ckey
