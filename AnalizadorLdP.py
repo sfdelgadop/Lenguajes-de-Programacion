@@ -220,7 +220,7 @@ for i in range(len(cadenaIntermedia)):
                         j + 1 + dif), ">"])
             elif cadenaIntermedia[i][j] == "=":
                 if j + 1 < len(cadenaIntermedia[i]) and cadenaIntermedia[i][j + 1] == "=":
-                    Tokens.append(["<", "tk_Equal", str(i + 1), str(j + 1 + dif), ">"])
+                    Tokens.append(["<", "tk_equal", str(i + 1), str(j + 1 + dif), ">"])
                     j = j + 1
                 else:
                     Tokens.append(["<", "tk_" + str(set_chars[cadenaIntermedia[i][j]]) , str(i + 1) , str(
