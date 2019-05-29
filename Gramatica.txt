@@ -9,7 +9,8 @@ PuntoyComa tk_semicolon
 PuntoyComa 0
 Identificador id Identificador2
 Identificador2 0
-Identificador2 tk_dot id
+Identificador2 tk_dot Identificador
+Identificador2 tk_obracket EsNumero tk_cbracket Identificador2
 Constantes const id tk_assig Dato Constantes2
 Constantes2 id tk_assig Dato Constantes2
 Constantes2 0
@@ -17,12 +18,13 @@ EsNumero Identificador
 EsNumero tk_num
 EsNumero tk_sum tk_num
 EsNumero OperacionMatematica
-EsNumero LlamadoFuncion
+EsNumero SolucionExpress2
 Dato tk_string Dato2
 Dato EsNumero
 Dato logico
 Dato Estructura
 Dato Registro
+Dato VectorInit
 Dato2 0
 Dato2 tk_sum
 Dato2 CadenaRecursiva
@@ -37,7 +39,7 @@ Operador tk_module
 Operador tk_exp
 OperacionMatematica tk_opar OperacionMatematica tk_cpar OperacionMatematica2
 OperacionMatematica EsNumero OperacionMatematica2
-OperacionMatematica LlamadoFuncion OperacionMatematica2
+OperacionMatematica SolucionExpress2 OperacionMatematica2
 OperacionMatematica2 Operador OperacionMatematica
 OperacionMatematica2 0
 TipoDato numerico
@@ -71,33 +73,35 @@ Dim Dim1 tk_comma Dim2
 Dim2 Dim1 DimFix
 DimFix 0
 DimFix tk_comma Dim2
-Registro registro tk_okey Tipos2 tk_ckey
+Registro registro tk_okey VariablesAux tk_ckey
 Sentencias SolucionExpress Sentencias
 Sentencias EstructuraControl Sentencias
 Sentencias 0
-SolucionExpress id SolucionExpress2
+SolucionExpress Identificador SolucionExpress2
 SolucionExpress2 tk_opar Parametros tk_cpar
 SolucionExpress2 tk_assig Dato SolucionExpress3
 SolucionExpress3 Operador Dato SolucionExpress3
+SolucionExpress3 tk_opar SolucionExpress3 tk_cpar
 SolucionExpress3 0
 Parametros Identificador ListaParametros
 Parametros Dato ListaParametros
-Parametros LlamadoFuncion ListaParametros
+Parametros SolucionExpress2 ListaParametros
 Parametros 0
 ListaParametros tk_comma ListaParametros2
 ListaParametros 0
 ListaParametros2 Identificador ListaParametros
 ListaParametros2 Dato ListaParametros
-ListaParametros2 LlamadoFuncion ListaParametros
-EstructuraControl If 
+ListaParametros2 SolucionExpress2 ListaParametros
+EstructuraControl If
 EstructuraControl Mientras
 EstructuraControl RepetirHasta
 EstructuraControl Desde
 EstructuraControl Eval
-If si tk_opar ExpresionLogica tk_cpar tk_okey Sentencias Aux
+If si tk_opar ExpresionLogica tk_cpar tk_okey Sentencias Aux tk_ckey
+Aux 0
 Aux sino Aux2
-Aux2 Sentencias tk_ckey
 Aux2 si Sentencias Aux3
+Aux2 Sentencias tk_ckey
 Aux3 Aux
 Aux3 Sino tk_ckey
 Mientras mientras tk_opar ExpresionLogica tk_cpar tk_okey Sentencias tk_ckey
@@ -111,14 +115,16 @@ Casos 0
 Sino sino tk_opar ExpresionLogica tk_cpar Sentencias
 Sino 0
 ExpresionLogica tk_logico ExpresionLogica2
-ExpresionLogica id ExpresionLogica2
+ExpresionLogica Identificador ExpresionLogica2
 ExpresionLogica not ExpresionLogica ExpresionLogica2
-ExpresionLogica LlamadoFuncion ExpresionLogica2
+ExpresionLogica SolucionExpress2 ExpresionLogica2
 ExpresionLogica Comparacion ExpresionLogica2
 ExpresionLogica tk_opar ExpresionLogica tk_cpar ExpresionLogica2
+ExpresionLogica2 Comparacion ExpresionLogica2
 ExpresionLogica2 and ExpresionLogica
 ExpresionLogica2 or ExpresionLogica
 ExpresionLogica2 0
+Comparacion OperadorComparacion ValoresComparacion
 Comparacion ValoresComparacion OperadorComparacion ValoresComparacion
 ValoresComparacion id
 ValoresComparacion tk_num
@@ -135,7 +141,7 @@ Subrutinabase 0
 Subrutinabase2 Metodo
 Subrutinabase2 Funcion
 Metodo Declaraciones inicio Sentencias fin Subrutinabase
-Funcion retorna id Declaraciones inicio Sentencias retorna tk_opar id tk_cpar fin Subrutinabase
+Funcion retorna TipoDato Declaraciones inicio Sentencias retorna tk_opar id tk_cpar fin Subrutinabase
 ParametrosSubrutina 0
 ParametrosSubrutina Identificador tk_colon TipoDato ListaParametrosSubrutina
 ParametrosSubrutina ref Identificador tk_colon TipoDato ListaParametrosSubrutina

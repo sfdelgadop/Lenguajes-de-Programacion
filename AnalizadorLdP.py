@@ -1,4 +1,4 @@
-f = open("0.txt", "r")
+f = open("2.txt", "r")
 p = []
 for x in f:
     p.append(x)
@@ -417,7 +417,7 @@ def emparejar(tok):
         print(tok)
         token = Tokens.pop(0)
     elif tok != "0":
-        print(str(token[len(token)-3]) + " " + str(token[len(token)-2]) + " Error sintactico, se Encontró " + str(tok) +" y se esperaba " + token[1])
+        print(str(token[len(token)-3]) + " " + str(token[len(token)-2]) + " Error sintactico, se Encontró " + token[1] +" y se esperaba " + str(tok))
         Cut = True
 
 
@@ -451,9 +451,9 @@ def function(S):
             Cut = True
 
 
-print(firsts(read()[0]))
-print(lasts(read()[0]))
-print(prediction(read()[0]))
+#print(firsts(read()[0]))
+#print(lasts(read()[0]))
+#print(prediction(read()[0]))
 Cut = False
 first = firsts(read()[0])
 predict = prediction(read()[0])
@@ -463,7 +463,8 @@ setTemp = predict[0][1]
 for i in range(1,len(predict)):
     if predict[i][0][0] == symbol:
         if not setTemp.isdisjoint(predict[i][1]):
-            print("ambiguedad en el símbolo" + str(symbol))
+            #print("ambiguedad en el símbolo" + str(symbol))
+            print("\n")
     else:
         symbol = predict[i][0][0]
         setTemp = predict[i][1]

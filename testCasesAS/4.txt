@@ -7,10 +7,10 @@ inicio
   imprimir ("Numero entero? ")
   leer (n)
   calcular_suma (n)
-  imprimir ("\nLa suma de los primeros ", n, "nï¿½meros enteros es ", tot)
+  imprimir ("\nLa suma de los primeros ", n, "números enteros es ", tot)
 fin
 
-/* continuaciï¿½n del programa ejemplo_llamada_subrutinas */
+/* continuación del programa ejemplo_llamada_subrutinas */
 subrutina imprimir_explicacion()
 inicio
   imprimir ("\nEste programa de ejemplo calcula la suma de los enteros",
@@ -22,7 +22,8 @@ subrutina calcular_suma (entero_tope : numerico)
 /*
   Ejemplo de subrutina que recibe un parametro.
 */
-
+var
+  k : numerico
   inicio
   tot = 0
   desde k = 1 hasta entero_tope
@@ -32,7 +33,8 @@ subrutina calcular_suma (entero_tope : numerico)
 fin
 
 subrutina entero (n : numerico) retorna numerico
-
+var
+  ent : numerico
 inicio
   ent = 0
   mientras ( n >= 1 )
@@ -54,9 +56,11 @@ inicio
 fin
 
 subrutina impr_vect (v : vector [*] numerico)
+var
+  k : numerico
 inicio
   desde k=1 hasta alen (v)
   {
-    imprimir (v [k], " ")
+    imprimir (v [k], “ “)
   }
 fin

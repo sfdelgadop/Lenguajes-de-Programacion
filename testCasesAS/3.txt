@@ -37,6 +37,10 @@ inicio
     si ( pnt >= 95 )
     {
       n5 = n5 + 1
+    sino si ( pnt >= 85 )
+      n3 = n3 + 1
+    sino si ( pnt < 60 )
+      n1 = n1 + 1
     }
     k = k + 1
   hasta ( k > 20 )

@@ -13,26 +13,26 @@ var
       nombre : cadena
       fecha_nac : registro
                 {
-                   dia : numerico
+                   dia, mes, año : numerico
                 }
       notas : vector [*] numerico
     }
   a : registro
     {
-      x : numerico
+      x, y : numerico
       v : vector [*] numerico
     }
   b : registro
     {
-      m : numerico
+      m, n : numerico
       c : vector [3] numerico
     }
   v : vector [100] registro
     {
-      a : numerico
-}
+      a, b : numerico
+    }	
 inicio
-  r = { "Carolina Gï¿½mez", // campo nombre
+  r = { "Carolina Gómez", // campo nombre
         {12, 07, 1969}, // campo fecha
         {87, 91, 99, 93} // 4 notas
       }
@@ -41,7 +41,7 @@ inicio
   r.notas [2] = 98
   b = { 10, 20, // corresponden a m y n respectivamente
         {0, 0, 0} // vector c inicializado con ceros
-        }
+	  }
   a = b
   v[3].b = 35
 fin

@@ -8,16 +8,21 @@ var
   h_max : numerico // Altura maxima
 
 inicio
+/*
+Pidamos al usuario que ingrese velocidad inicial y angulo de
+disparo. Este ultimo debe estar en grados sexagesimales.
+*/
 
-
+  imprimir ("\n\n",
+            "Ingrese velocidad inicial, angulo de disparo en sexagesimales:")
   leer (v_disp, a_disp)
   // La funcion sin() opera con radianes y nosotros leimos en sexagesimales.
   a_disp_rad = a_disp * PI / 180
   h_max = ( (v_disp * sin (a_disp_rad) ) ^ 2 ) / (2 * 9.8)
   imprimir ("\n\nAltura maxima=", h_max)
   a = (b + c) * (b / y) +
-    (y / c)		// Sentencia vï¿½lida a nivel sintï¿½ctico
-  a = b + c; n = a / y	// Estas tambiï¿½n, separadas por ;
+    (y / c)		// Sentencia válida a nivel sintáctico
+  a = b + c; n = a / y	// Estas también, separadas por ;
   a = b - c % 10 + 1
   y = v0y * t + 1/2 * -g * t^2 // sin parentesis
   y = (v0y * t) + ( (1/2)*(-g)*(t^2) )
@@ -26,13 +31,13 @@ inicio
   eval
   {
     caso ( let >= 'A' and let <= 'Z' )
-      msg = "letra mayï¿½scula"
+      msg = "letra mayúscula"
     caso ( let >= 'a' and let <= 'z' )
-      msg = "letra minï¿½scula"
+      msg = "letra minúscula"
     caso ( let >= '0' and let <= '9' )
-      msg = "dï¿½gito"
+      msg = "dígito"
     sino
-      msg = "algï¿½n otro"
+      msg = "algún otro"
   }
 fin 
 
