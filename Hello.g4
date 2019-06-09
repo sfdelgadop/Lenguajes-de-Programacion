@@ -77,11 +77,12 @@ desde : Tk_desde Tk_id Tk_assig auxNum Tk_hasta auxNum
 llamada : Tk_id Tk_opar tiposLLamada? (tiposLLamada Tk_comma tiposLLamada)* Tk_cpar;
 tiposLLamada : Tk_num | Tk_str | llamada | operacionMatematica | condicion | vector | matriz;
 
-////////////////////////////       Sub Rutinas        ///////////////////////////////////TODO
+////////////////////////////       Sub Rutinas        ///////////////////////////////////
 
-subRutinas: Tk_id ;//TODO
-
-
+subRutinas: Tk_subrutina Tk_id Tk_opar subParamatros? Tk_cpar (Tk_retorna tipo)? eol?
+            declaraciones? eol? Tk_inicio eol sentencias? (Tk_retorna Tk_opar Tk_id Tk_cpar)? eol? Tk_fin ;
+subParamatros : Tk_id (Tk_comma eol? Tk_id)* Tk_colon tipo (eol subParamatros)?
+              | Tk_ref Tk_id (Tk_comma eol? Tk_id)* Tk_colon tipo (eol subParamatros)?;
 
 
 //////////////////////////// No se como llamar esta sección //////////////////////////////
@@ -106,7 +107,7 @@ matriz : Tk_str;//TODO x2
 
 
 
-eol : EOL; //end of line (para pensar y ponerle el punto y coma luego (podría desaparecer en un futuro))
+eol : EOL | Tk_semicolon; //end of line (para pensar y ponerle el punto y coma luego (podría desaparecer en un futuro))
 
 
 /////////////////////////////       Tokens            ////////////////////////////////////
@@ -132,6 +133,9 @@ Tk_caso : 'caso';
 Tk_desde : 'desde';
 Tk_si: 'si';
 Tk_sino: 'sino';
+Tk_subrutina: 'subrutina';
+Tk_retorna: 'retorna';
+Tk_ref: 'ref';
 Tk_sum : '+';
 Tk_subt : '-';
 Tk_div : '/';
@@ -144,12 +148,14 @@ Tk_equal : '==';
 Tk_diferent : '<>';
 Tk_comma : ',';
 Tk_colon : ':';
+Tk_semicolon : ';'+;
 Tk_assig: '=';
 Tk_okey : '{';
 Tk_ckey : '}';
 Tk_opar : '(';
 Tk_cpar : ')';
-Tk_num : [0-9]+('e'[0-9]+)?; // TODO falta agregar . decimal
+Tk_num : [0-9]+('.'[0-9]+)?('e'[0-9]+('.'[0-9]+)?)?
+        |[0-9]+('.'[0-9]+)?('E'[0-9]+('.'[0-9]+)?)?;
 Tk_str : '"'[A-Za-z1-9 ]+'"'; // TODO falta agregar los de comilla sencilla
 Tk_id : [a-zA-Z]+[a-z0-9A-Z]*;
 EOL: [\r\n]+;
