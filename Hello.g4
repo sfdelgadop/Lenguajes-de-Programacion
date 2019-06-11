@@ -14,21 +14,26 @@ declaraciones :variables declaraciones?
 
 // Declaracion variables
 variables : Tk_var eol variables_aux?; // es obligatorio ese salto de linea?
-variables_aux: Tk_id (Tk_comma eol? Tk_id)* Tk_colon tipo eol variables_aux?;
+variables_aux: Tk_id (Tk_comma eol? Tk_id)* Tk_colon tipo eol variables_aux? //variables normales
+             | Tk_id Tk_colon Tk_vector Tk_obracket vectorAux Tk_cbracket tipo eol variables_aux? //vectores
+             | Tk_id Tk_colon Tk_matriz Tk_obracket vectorAux (Tk_comma vectorAux)+ Tk_cbracket tipo eol variables_aux?; //matrices
+
+vectorAux : operacionMatematica | Tk_mult;
+
 tipo : Tk_numerico
        | Tk_logico
-       | Tk_cadena;
+       | Tk_cadena
+       | registro;
 
 // Declaracion constantes
 constants : Tk_cons eol constants_aux?;
 constants_aux : Tk_id Tk_assig valor eol constants_aux?;
-valor : Tk_num | Tk_str | verdad;
+valor : operacionMatematica | Tk_str | verdad;
 verdad : Tk_true | Tk_false;
 
 //Declaración Tipos
 types : Tk_tipos eol types_aux?;
-types_aux : Tk_id Tk_colon tipo2 eol types_aux?;
-tipo2 : Tk_numerico | Tk_logico | Tk_cadena | registro;
+types_aux : Tk_id Tk_colon tipo eol types_aux?;
 registro: Tk_registro eol? Tk_okey eol variables_aux Tk_ckey;
 
 ////////////////////////////       Sentencias         ///////////////////////////////////
@@ -44,7 +49,9 @@ sentencias: asignacion sentencias? eol
 // Sentencias de asignación
 
 asignacion : Tk_id Tk_assig asignacionAux;
-asignacionAux : valor | llamada | operacionMatematica | Tk_id ;
+asignacionAux : llamada | valor |estruct;
+estruct : Tk_okey valor (Tk_comma valor) Tk_ckey // TODO la forma esa rara para rellenar matrices y vectores
+        | Tk_okey valor Tk_ckey;
 
 
 // Sentencias condicionales (if)
@@ -69,7 +76,7 @@ eval : Tk_eval eol? Tk_okey eol?
 
 // Sentencias ciclo desde / hasta
 
-desde : Tk_desde Tk_id Tk_assig auxNum Tk_hasta auxNum
+desde : Tk_desde Tk_id Tk_assig operacionMatematica Tk_hasta operacionMatematica
        eol? Tk_okey eol? sentencias Tk_ckey; //TODO en la documentación menciona como poner el paso de incremento pero no encuentro un ejemplo pg 51
 
 //Sentencias de llamado de función
@@ -86,24 +93,41 @@ subParamatros : Tk_id (Tk_comma eol? Tk_id)* Tk_colon tipo (eol subParamatros)?
 
 
 //////////////////////////// No se como llamar esta sección //////////////////////////////
-// parte matemática
-operacionMatematica : auxNum signo operacionMatematicaAux;  // TODO lo de los parentesis
-operacionMatematicaAux : auxNum (signo operacionMatematicaAux)?;
 
-signo: Tk_sum | Tk_subt | Tk_div | Tk_mult ;
+// parte matemática CON precedencia de signos
+
+operacionMatematica : operacionMatematica signo1 (precedencia1)
+                    | precedencia1;
+
+
+precedencia1 : precedencia1 signo2 precedencia2
+             | precedencia2;
+
+
+precedencia2 : precedencia2 signo3 precedencia3
+             | precedencia3;
+
+
+precedencia3 : Tk_opar operacionMatematica Tk_cpar
+             | auxNum;
+
+signo1: Tk_sum | Tk_subt ;
+signo2: Tk_div | Tk_mult | Tk_mod;
+signo3: Tk_exp;
 
 auxNum : Tk_id | Tk_num | llamada;
 
-//Parte de lógica  //TODO necesita bastante trabajo IMPORTANTE
+// Parte de lógica  //TODO necesita bastante trabajo IMPORTANTE
 
 condicion : auxLog relacional auxLog (condicionAux condicion)?; //TODO lo de los parentesis x2
 condicionAux : Tk_or | Tk_and; //TODO pensar en qué hacer con la negación
 relacional : Tk_less | Tk_equal | Tk_lessEqual | Tk_bigger | Tk_biggerEqual | Tk_diferent;
 auxLog : Tk_id | Tk_num | llamada | verdad | Tk_str;  //TODO --- TRUE < TRUE?
 
-// estructuras //TODO
-vector : Tk_str;//TODO es evidente que no hay mucho
-matriz : Tk_str;//TODO x2
+
+// Estructuras
+vector : Tk_id Tk_obracket operacionMatematica Tk_cbracket;
+matriz : Tk_id Tk_obracket operacionMatematica (Tk_comma operacionMatematica)+ Tk_cbracket;
 
 
 
@@ -136,10 +160,14 @@ Tk_sino: 'sino';
 Tk_subrutina: 'subrutina';
 Tk_retorna: 'retorna';
 Tk_ref: 'ref';
+Tk_vector: 'vector';
+Tk_matriz: 'matriz';
 Tk_sum : '+';
 Tk_subt : '-';
 Tk_div : '/';
 Tk_mult : '*';
+Tk_mod : '%';
+Tk_exp : '^';
 Tk_less : '<';
 Tk_lessEqual : '<=';
 Tk_bigger : '>';
@@ -154,9 +182,11 @@ Tk_okey : '{';
 Tk_ckey : '}';
 Tk_opar : '(';
 Tk_cpar : ')';
+Tk_obracket : '[';
+Tk_cbracket : ']';
 Tk_num : [0-9]+('.'[0-9]+)?('e'[0-9]+('.'[0-9]+)?)?
         |[0-9]+('.'[0-9]+)?('E'[0-9]+('.'[0-9]+)?)?;
 Tk_str : '"'[A-Za-z1-9 ]+'"'; // TODO falta agregar los de comilla sencilla
-Tk_id : [a-zA-Z]+[a-z0-9A-Z]*;
+Tk_id : [a-zA-Z_ñÑ][a-z0-9A-Z_ñÑ]* ('.' Tk_id)* ; // llamado a secciones de registros quedan como ID's TODO revisar si es correcto
 EOL: [\r\n]+;
 WS : [ \t]+ -> skip;
