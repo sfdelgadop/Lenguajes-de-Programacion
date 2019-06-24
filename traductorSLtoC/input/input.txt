@@ -1,0 +1,41 @@
+programa mira
+
+cons
+    TACHADO = 5
+    NO_TACHADO = FALSE
+    NO_TACHADO = "fdfsdf"
+
+var
+r : registro
+    {
+        nombre : cadena
+        edad, peso : numerico
+        direccion : cadena
+    }
+
+verno : matriz [5,45+5] cadena
+notas : vector [100 +5 *(15.2-4)] numerico
+a,b,c : numerico
+inicio
+    a = papaya(35)
+
+    imprimir(42)
+
+    b = TRUE
+    c = por
+
+
+
+    si (a>b)
+    {
+        a = 2
+        sino si(a<4)
+            a = 2+2
+        si (1<2){
+            a=3
+        sino
+            a =2
+        }
+    }
+
+fin

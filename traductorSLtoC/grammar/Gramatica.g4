@@ -1,8 +1,8 @@
 //TODO comentarios, vectores-matrices,
 
-grammar Hello;
+grammar Gramatica;
 
-s : eol? programa? declaraciones? Tk_inicio eol sentencias? Tk_fin subRutinas? ; //inicio de la gramatica
+s : eol? programa? declaraciones? cuerpo subRutinas? ; //inicio de la gramatica
 
 programa : Tk_programa Tk_id eol;
 
@@ -18,9 +18,10 @@ variables_aux: Tk_id (Tk_comma eol? Tk_id)* Tk_colon tipo eol variables_aux? //v
              | Tk_id Tk_colon Tk_vector Tk_obracket vectorAux Tk_cbracket tipo eol variables_aux? //vectores
              | Tk_id Tk_colon Tk_matriz Tk_obracket vectorAux (Tk_comma vectorAux)+ Tk_cbracket tipo eol variables_aux?; //matrices
 
-vectorAux : operacionMatematica | Tk_mult;
+vectorAux : Tk_mult
+          | operacionMatematica;
 
-tipo : Tk_numerico
+tipo :   Tk_numerico
        | Tk_logico
        | Tk_cadena
        | registro;
@@ -28,7 +29,7 @@ tipo : Tk_numerico
 // Declaracion constantes
 constants : Tk_cons eol constants_aux?;
 constants_aux : Tk_id Tk_assig valor eol constants_aux?;
-valor : operacionMatematica | Tk_str | verdad;
+valor : operacionMatematica | verdad | Tk_str;
 verdad : Tk_true | Tk_false;
 
 //Declaración Tipos
@@ -36,15 +37,20 @@ types : Tk_tipos eol types_aux?;
 types_aux : Tk_id Tk_colon tipo eol types_aux?;
 registro: Tk_registro eol? Tk_okey eol variables_aux Tk_ckey;
 
+
+/////////////////////////////      Cuerpo            ///////////////////////////////////
+
+cuerpo: Tk_inicio eol sentencias* Tk_fin;
+
 ////////////////////////////       Sentencias         ///////////////////////////////////
 
-sentencias: asignacion sentencias? eol
-           |condicional sentencias? eol
-           |cicloMientras sentencias? eol
-           |cicloRepetir sentencias? eol
-           |eval sentencias? eol
-           |desde sentencias? eol
-           |llamada sentencias? eol;
+sentencias: asignacion eol
+           |condicional eol
+           |cicloMientras eol
+           |cicloRepetir eol
+           |eval eol
+           |desde eol
+           |llamada eol;
 
 // Sentencias de asignación
 
@@ -56,9 +62,12 @@ estruct : Tk_okey valor (Tk_comma valor) Tk_ckey // TODO la forma esa rara para 
 
 // Sentencias condicionales (if)
 
-condicional : Tk_si Tk_opar condicion Tk_cpar eol? Tk_okey eol? sentencias?
-              (Tk_sino Tk_si Tk_opar condicion Tk_cpar eol? sentencias? eol?)*
-              (Tk_sino eol? sentencias? eol?)? Tk_ckey;
+condicional : Tk_si Tk_opar condicion Tk_cpar eol? Tk_okey eol? sentencias*
+              condicionSinoSi* condicionSino? Tk_ckey;
+
+condicionSinoSi : Tk_sino Tk_si Tk_opar condicion Tk_cpar eol? sentencias* eol?;
+
+condicionSino: Tk_sino eol? sentencias* eol?;
 
 // Sentencias del ciclo mientras
 
@@ -70,9 +79,9 @@ cicloRepetir : Tk_repetir eol? sentencias? Tk_hasta Tk_opar condicion Tk_cpar;
 
 // Sentencias del eval (switch case)
 
-eval : Tk_eval eol? Tk_okey eol?
-       (Tk_caso Tk_opar condicion Tk_cpar eol? sentencias)*
-       (Tk_sino eol? sentencias)? Tk_ckey;
+eval : Tk_eval eol? Tk_okey eol? Tk_opar condicion Tk_cpar evalAux* condicionSino? Tk_ckey;
+
+evalAux : Tk_caso Tk_opar condicion Tk_cpar eol? sentencias ;
 
 // Sentencias ciclo desde / hasta
 

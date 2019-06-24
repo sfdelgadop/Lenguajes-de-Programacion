@@ -1,0 +1,34 @@
+// program mira
+const float TACHADO = 5;
+const bool NO_TACHADO = false;
+const string NO_TACHADO = "fdfsdf";
+struct r {
+string nombre;
+float edad,peso;
+string direccion;
+}
+string verno[5][45+5];
+float notas[100+5*(15.2-4)];
+float a,b,c;
+int main() 
+{
+a = papaya(35);
+cout << 42;
+b = true;
+c = por;
+if ( a>b ) 
+{
+a = 2;
+}else if (a<4) 
+{
+a = 2+2;
+if ( 1<2 ) 
+{
+a = 3;
+}else
+{
+a = 2;
+} 
+ } 
+ 
+}
