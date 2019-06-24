@@ -375,6 +375,18 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSubRutinasDeclar(GramaticaParser.SubRutinasDeclarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSubRutinasDeclar(GramaticaParser.SubRutinasDeclarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -394,6 +406,18 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRetorna(GramaticaParser.RetornaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRetornaAux(GramaticaParser.RetornaAuxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRetornaAux(GramaticaParser.RetornaAuxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

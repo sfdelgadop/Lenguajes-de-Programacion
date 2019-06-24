@@ -1,4 +1,5 @@
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.io.*;
 
@@ -363,15 +364,67 @@ public class Translator extends GramaticaBaseListener {
 		}
 		file(" ( ");
 
-
-
-
-
 	}
 
+	@Override
+	public void enterSubParamatros(GramaticaParser.SubParamatrosContext ctx) {
 
+		boolean b = false;
+		for(TerminalNode i : ctx.Tk_id()){
+			if(b){
+				file(" , ");
+			}
+			b = true;
+			if(ctx.tipo() != null) {
+				file(ctx.tipo().getText());
+				if (ctx.tipo().Tk_numerico() == ctx.tipo().getChild(0)) {
+					file("float ");
+				}
+				if (ctx.tipo().Tk_logico() == ctx.tipo().getChild(0)) {
+					file("bool ");
+				}
+				if (ctx.tipo().Tk_cadena() == ctx.tipo().getChild(0)) {
+					file("string ");
+				}
+			}
+			if(ctx.Tk_ref() != null){
+				file("&");
+			}
+			file(i.getText());
+		}
+		file(" ");
+	}
 
+	@Override
+	public void enterSubRutinasDeclar(GramaticaParser.SubRutinasDeclarContext ctx) {
+		file(")\n");
+	}
 
+	@Override
+	public void enterSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx) {
+		file("{\n");
+	}
+	@Override
+	public void exitSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx) {
+		file("\n}\n");
+	}
+
+	@Override
+	public void enterRetorna(GramaticaParser.RetornaContext ctx) {
+		file("return ");
+		if(ctx.retornaAux().getChild(0) == ctx.retornaAux().verdad()){
+			if(ctx.retornaAux().getText().equals("TRUE")){
+				file("true");
+			}
+			if(ctx.retornaAux().getText().equals("FALSE")){
+				file("false");
+			}
+		}else {
+			file(ctx.retornaAux().getText());
+		}
+		file(" ;\n");
+
+	}
 
 /////////////////////////////////////// no se como llamar esta sección 2.0 //////////////////////////////////////////////////
 // por ahora vacía

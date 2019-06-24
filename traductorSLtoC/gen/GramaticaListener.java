@@ -307,6 +307,16 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitSubRutinas(GramaticaParser.SubRutinasContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#subRutinasDeclar}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubRutinasDeclar(GramaticaParser.SubRutinasDeclarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#subRutinasDeclar}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubRutinasDeclar(GramaticaParser.SubRutinasDeclarContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#subRutinasAux}.
 	 * @param ctx the parse tree
 	 */
@@ -326,6 +336,16 @@ public interface GramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRetorna(GramaticaParser.RetornaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#retornaAux}.
+	 * @param ctx the parse tree
+	 */
+	void enterRetornaAux(GramaticaParser.RetornaAuxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#retornaAux}.
+	 * @param ctx the parse tree
+	 */
+	void exitRetornaAux(GramaticaParser.RetornaAuxContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#subParamatros}.
 	 * @param ctx the parse tree

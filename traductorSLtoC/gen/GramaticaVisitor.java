@@ -190,6 +190,12 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSubRutinas(GramaticaParser.SubRutinasContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#subRutinasDeclar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSubRutinasDeclar(GramaticaParser.SubRutinasDeclarContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#subRutinasAux}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -201,6 +207,12 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRetorna(GramaticaParser.RetornaContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#retornaAux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRetornaAux(GramaticaParser.RetornaAuxContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#subParamatros}.
 	 * @param ctx the parse tree
