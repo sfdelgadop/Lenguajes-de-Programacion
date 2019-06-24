@@ -1,4 +1,4 @@
-// Generated from /home/sebastian/IdeaProjects/traductorSLtoC/grammar/Gramatica.g4 by ANTLR 4.7.2
+// Generated from /home/sebastian/Documentos/GitHub/Lenguajes-de-Programacion/traductorSLtoC/grammar/Gramatica.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -189,6 +189,18 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSubRutinas(GramaticaParser.SubRutinasContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#subRutinasAux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#retorna}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRetorna(GramaticaParser.RetornaContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#subParamatros}.
 	 * @param ctx the parse tree

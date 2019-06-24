@@ -96,7 +96,12 @@ tiposLLamada : Tk_num | Tk_str | llamada | operacionMatematica | condicion | vec
 ////////////////////////////       Sub Rutinas        ///////////////////////////////////
 
 subRutinas: Tk_subrutina Tk_id Tk_opar subParamatros? Tk_cpar (Tk_retorna tipo)? eol?
-            declaraciones? eol? Tk_inicio eol sentencias? (Tk_retorna Tk_opar Tk_id Tk_cpar)? eol? Tk_fin ;
+            declaraciones* eol? subRutinasAux ;
+
+subRutinasAux : Tk_inicio eol sentencias? retorna? eol? Tk_fin ;
+
+retorna: Tk_retorna Tk_opar Tk_id Tk_cpar ;
+
 subParamatros : Tk_id (Tk_comma eol? Tk_id)* Tk_colon tipo (eol subParamatros)?
               | Tk_ref Tk_id (Tk_comma eol? Tk_id)* Tk_colon tipo (eol subParamatros)?;
 

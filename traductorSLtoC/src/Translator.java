@@ -339,6 +339,37 @@ public class Translator extends GramaticaBaseListener {
 
 
 
+////////////////////////////////////////////////// Sub RUtinas  ////////////////////////////////////////////////////////////////
+
+
+	@Override
+	public void enterSubRutinas(GramaticaParser.SubRutinasContext ctx) {
+		if(ctx.tipo() != null){
+			file(ctx.tipo().getText());
+			if(ctx.tipo().Tk_logico() == ctx.tipo().getChild(0)){
+				file("bool ");
+			}
+			if(ctx.tipo().Tk_cadena() == ctx.tipo().getChild(0)){
+				file("string ");
+			}
+			if(ctx.tipo().Tk_numerico() == ctx.tipo().getChild(0)){
+				file("float ");
+			}
+		}else {
+			file("void ");
+		}
+		if(ctx.Tk_id() != null){
+			file(ctx.Tk_id().getText());
+		}
+		file(" ( ");
+
+
+
+
+
+	}
+
+
 
 
 

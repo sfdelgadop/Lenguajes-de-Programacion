@@ -1,4 +1,4 @@
-// Generated from /home/sebastian/IdeaProjects/traductorSLtoC/grammar/Gramatica.g4 by ANTLR 4.7.2
+// Generated from /home/sebastian/Documentos/GitHub/Lenguajes-de-Programacion/traductorSLtoC/grammar/Gramatica.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -306,6 +306,26 @@ public interface GramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSubRutinas(GramaticaParser.SubRutinasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#subRutinasAux}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#subRutinasAux}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#retorna}.
+	 * @param ctx the parse tree
+	 */
+	void enterRetorna(GramaticaParser.RetornaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#retorna}.
+	 * @param ctx the parse tree
+	 */
+	void exitRetorna(GramaticaParser.RetornaContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#subParamatros}.
 	 * @param ctx the parse tree
