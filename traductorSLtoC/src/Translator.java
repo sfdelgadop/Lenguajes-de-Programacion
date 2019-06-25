@@ -1,9 +1,6 @@
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
 import java.io.*;
-
-
 
 public class Translator extends GramaticaBaseListener {
 
