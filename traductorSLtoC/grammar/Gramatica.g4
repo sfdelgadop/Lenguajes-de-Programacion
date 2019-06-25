@@ -2,15 +2,15 @@
 
 grammar Gramatica;
 
-s : eol* programa? declaraciones? cuerpo subRutinas? ; //inicio de la gramatica
+s : eol* programa? declaraciones* cuerpo subRutinas? ; //inicio de la gramatica
 
 programa : Tk_programa Tk_id eol*;
 
 /////////////////////////        Declaraciones        /////////////////////////////////////////
 
-declaraciones :variables declaraciones?
-              |constants declaraciones?
-              |types declaraciones?;
+declaraciones :variables
+              |constants
+              |types;
 
 // Declaracion variables
 variables : Tk_var eol variables_aux?; // es obligatorio ese salto de linea?
@@ -24,7 +24,8 @@ vectorAux : Tk_mult
 tipo :   Tk_numerico
        | Tk_logico
        | Tk_cadena
-       | registro;
+       | registro
+       | Tk_id;
 
 // Declaracion constantes
 constants : Tk_cons eol constants_aux?;
@@ -208,7 +209,7 @@ Tk_cbracket : ']';
 Tk_num : [0-9]+('.'[0-9]+)?('e'[0-9]+('.'[0-9]+)?)?
         |[0-9]+('.'[0-9]+)?('E'[0-9]+('.'[0-9]+)?)?;
 Tk_str : '"'.*?'"'; // TODO falta agregar los de comilla sencilla
-Tk_id : [a-zA-Z_ñÑ][a-z0-9A-Z_ñÑ]* ('.' Tk_id)* ; // llamado a secciones de registros quedan como ID's TODO revisar si es correcto / Testee la regla y todo okay
+Tk_id : [a-zA-Z_ñÑ][a-z0-9A-Z_ñÑ]* (Tk_obracket Tk_num Tk_cbracket)* ('.' Tk_id)* ; // llamado a secciones de registros quedan como ID's TODO revisar si es correcto / Testee la regla y todo okay
 /////////////////////////////       Comentarios      /////////////////////////////
 COMMENT 		: '/*' .*? '*/' -> skip ;
 LINE_COMMENT 	: '//' ~[\r\n]* -> skip ;
