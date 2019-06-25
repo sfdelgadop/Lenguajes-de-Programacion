@@ -90,7 +90,7 @@ desde : Tk_desde Tk_id Tk_assig operacionMatematica Tk_hasta operacionMatematica
 
 //Sentencias de llamado de función
 
-llamada : Tk_id Tk_opar tiposLLamada? (tiposLLamada Tk_comma tiposLLamada)* Tk_cpar;
+llamada : Tk_id Tk_opar tiposLLamada? (eol? tiposLLamada Tk_comma eol?tiposLLamada)* Tk_cpar;
 tiposLLamada : Tk_num | Tk_str | llamada | operacionMatematica | condicion | vector | matriz;
 
 ////////////////////////////       Sub Rutinas        ///////////////////////////////////
@@ -203,7 +203,7 @@ Tk_obracket : '[';
 Tk_cbracket : ']';
 Tk_num : [0-9]+('.'[0-9]+)?('e'[0-9]+('.'[0-9]+)?)?
         |[0-9]+('.'[0-9]+)?('E'[0-9]+('.'[0-9]+)?)?;
-Tk_str : '"'[A-Za-z1-9 ]+'"'; // TODO falta agregar los de comilla sencilla
+Tk_str : '"'.*?'"'; // TODO falta agregar los de comilla sencilla
 Tk_id : [a-zA-Z_ñÑ][a-z0-9A-Z_ñÑ]* ('.' Tk_id)* ; // llamado a secciones de registros quedan como ID's TODO revisar si es correcto
 EOL: [\r\n]+;
 WS : [ \t]+ -> skip;
