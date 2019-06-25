@@ -1,21 +1,17 @@
-// program mira
-const float TACHADO = 5;
-const bool NO_TACHADO = false;
-const string NO_TACHADO = "fdfsdf";
-struct r {
-string nombre;
-float edad,peso;
-string direccion;
-}
-string verno[5][45+5];
-float notas[100+5*(15.2-4)];
-float a,b,c;
+// program uno
+float n,suma,k;
 int main() 
 {
-a = papaya(35);
-cout << 42;
-b = true;
-c = por;
+cout << "\nSuma de numeros pares entre 1 y n.\nPor favor " << "ingrese un valor para n: ";
+cin >> n;
+suma = 0;
+a = aslo(12,32);
+for (k = 2 ; k<n ; i = i + 2)
+{
+suma = suma+k;
+
+}
+cout << "\nLa suma es " << suma;
 if ( a>b ) 
 {
 a = 2;
@@ -29,8 +25,6 @@ a = 3;
 {
 a = 2;
 } 
-}
+ } 
  
 }
-
-

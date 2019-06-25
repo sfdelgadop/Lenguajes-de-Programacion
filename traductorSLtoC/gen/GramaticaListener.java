@@ -197,6 +197,16 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitEstruct(GramaticaParser.EstructContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#estruct2}.
+	 * @param ctx the parse tree
+	 */
+	void enterEstruct2(GramaticaParser.Estruct2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#estruct2}.
+	 * @param ctx the parse tree
+	 */
+	void exitEstruct2(GramaticaParser.Estruct2Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#condicional}.
 	 * @param ctx the parse tree
 	 */

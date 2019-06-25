@@ -307,7 +307,14 @@ public class Translator extends GramaticaBaseListener {
 			file(ctx.Tk_id().getText());
 			file("<");
 			file(ctx.operacionMatematica(1).getText());
-			file(" ; i++)\n{\n");//reitero el comentario que dejé en la gramática
+			if(ctx.Tk_paso() != null){
+				file(" ; i = i + ");
+				file(ctx.operacionMatematica(2).getText());
+				file(")\n{\n");
+			}else{
+
+				file(" ; i++)\n{\n");
+			}
 		}
 	@Override
 	public void exitDesde(GramaticaParser.DesdeContext ctx) {
@@ -319,8 +326,12 @@ public class Translator extends GramaticaBaseListener {
 	@Override
 	public void enterLlamada(GramaticaParser.LlamadaContext ctx) {
 		if(ctx.Tk_id().getText().equals("imprimir")){
-			file("cout << ");
-			file(ctx.tiposLLamada(0).getText());
+			file("cout");
+			for(GramaticaParser.TiposLLamadaContext i : ctx.tiposLLamada()){
+				file(" << ");
+
+				file(i.getText());
+			}
 			file(";\n");
 
 		}

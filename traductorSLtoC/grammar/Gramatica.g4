@@ -2,9 +2,9 @@
 
 grammar Gramatica;
 
-s : eol? programa? declaraciones? cuerpo subRutinas? ; //inicio de la gramatica
+s : eol* programa? declaraciones? cuerpo subRutinas? ; //inicio de la gramatica
 
-programa : Tk_programa Tk_id eol;
+programa : Tk_programa Tk_id eol*;
 
 /////////////////////////        Declaraciones        /////////////////////////////////////////
 
@@ -55,7 +55,7 @@ sentencias: asignacion eol
 // Sentencias de asignación
 
 asignacion : Tk_id Tk_assig asignacionAux;
-asignacionAux : llamada | valor |estruct;
+asignacionAux : llamada | valor |estruct|vector|matriz;
 estruct : Tk_okey valor (Tk_comma estruct2) Tk_ckey
         | Tk_okey estruct (Tk_comma estruct) Tk_ckey // TODO la forma esa rara para rellenar matrices y vectores
         | Tk_okey valor Tk_ckey;
@@ -74,26 +74,26 @@ condicionSino: Tk_sino eol? sentencias* eol?;
 
 // Sentencias del ciclo mientras
 
-cicloMientras : Tk_mientras Tk_opar condicion Tk_cpar eol? Tk_okey eol? sentencias? Tk_ckey;
+cicloMientras : Tk_mientras Tk_opar condicion Tk_cpar eol? Tk_okey eol? sentencias* Tk_ckey;
 
 // Sentencias ciclo repetir hasta
 
-cicloRepetir : Tk_repetir eol? sentencias? Tk_hasta Tk_opar condicion Tk_cpar;
+cicloRepetir : Tk_repetir eol? sentencias* Tk_hasta Tk_opar condicion Tk_cpar;
 
 // Sentencias del eval (switch case)
 
-eval : Tk_eval eol? Tk_okey eol? Tk_opar condicion Tk_cpar evalAux* condicionSino? Tk_ckey;
+eval : Tk_eval eol? Tk_okey eol? evalAux* condicionSino? Tk_ckey;
 
 evalAux : Tk_caso Tk_opar condicion Tk_cpar eol? sentencias ;
 
 // Sentencias ciclo desde / hasta
 
-desde : Tk_desde Tk_id Tk_assig operacionMatematica Tk_hasta operacionMatematica (Tk_paso Tk_num) // TODO la forma en que se da el paso es opcional, o por defecto es uno
-       eol? Tk_okey eol? sentencias Tk_ckey;
+desde : Tk_desde Tk_id Tk_assig operacionMatematica Tk_hasta operacionMatematica (Tk_paso operacionMatematica)? // TODO la forma en que se da el paso es opcional, o por defecto es uno
+       eol? Tk_okey eol? sentencias* Tk_ckey;
 
 //Sentencias de llamado de función
 
-llamada : Tk_id Tk_opar tiposLLamada? (eol? tiposLLamada Tk_comma eol?tiposLLamada)* Tk_cpar;
+llamada : Tk_id Tk_opar tiposLLamada? (eol? Tk_comma eol? tiposLLamada)* Tk_cpar;
 tiposLLamada : Tk_num | Tk_str | llamada | operacionMatematica | condicion | vector | matriz;
 
 ////////////////////////////       Sub Rutinas        ///////////////////////////////////
@@ -135,14 +135,14 @@ signo1: Tk_sum | Tk_subt ;
 signo2: Tk_div | Tk_mult | Tk_mod;
 signo3: Tk_exp;
 
-auxNum : Tk_id | Tk_num | llamada;
+auxNum : Tk_id | Tk_num | llamada | vector | matriz;
 
 // Parte de lógica  //TODO necesita bastante trabajo IMPORTANTE
 
 condicion : auxLog relacional auxLog (condicionAux condicion)?; //TODO lo de los parentesis x2
 condicionAux : Tk_or | Tk_and; //TODO pensar en qué hacer con la negación
 relacional : Tk_less | Tk_equal | Tk_lessEqual | Tk_bigger | Tk_biggerEqual | Tk_diferent;
-auxLog : Tk_id | Tk_num | llamada | verdad | Tk_str;  //TODO --- TRUE < TRUE?
+auxLog : Tk_id | Tk_num | llamada | verdad | Tk_str | vector;  //TODO --- TRUE < TRUE?
 
 
 // Estructuras
@@ -158,7 +158,7 @@ eol : EOL | Tk_semicolon; //end of line (para pensar y ponerle el punto y coma l
 Tk_inicio : 'inicio';
 Tk_fin : 'fin';
 Tk_var : 'var';
-Tk_cons : 'cons';
+Tk_cons : 'const';
 Tk_tipos: 'tipos';
 Tk_programa : 'programa';
 Tk_numerico : 'numerico';
