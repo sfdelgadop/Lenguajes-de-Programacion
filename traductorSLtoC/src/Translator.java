@@ -279,10 +279,7 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterEval(GramaticaParser.EvalContext ctx) {
-		file("if ( ");
-		file(ctx.condicion().getText());
-		file(" )\n{\n");
-	}
+	}//falta el Break
 	@Override
 	public void exitEval(GramaticaParser.EvalContext ctx) {
 		file("\n}\n");
@@ -290,7 +287,7 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterEvalAux(GramaticaParser.EvalAuxContext ctx) {
-		file("}else if (");
+		file("if (");
 		file(ctx.condicion().getText());
 		file(") \n{\n");
 	}
