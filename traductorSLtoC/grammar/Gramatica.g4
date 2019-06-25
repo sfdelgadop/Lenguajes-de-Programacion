@@ -56,7 +56,10 @@ sentencias: asignacion eol
 
 asignacion : Tk_id Tk_assig asignacionAux;
 asignacionAux : llamada | valor |estruct;
-estruct : Tk_okey valor (Tk_comma valor) Tk_ckey // TODO la forma esa rara para rellenar matrices y vectores
+estruct : Tk_okey valor (Tk_comma estruct2) Tk_ckey
+        | Tk_okey estruct (Tk_comma estruct) Tk_ckey // TODO la forma esa rara para rellenar matrices y vectores
+        | Tk_okey valor Tk_ckey;
+estruct2 : valor (Tk_comma estruct2) Tk_ckey
         | Tk_okey valor Tk_ckey;
 
 
@@ -85,8 +88,8 @@ evalAux : Tk_caso Tk_opar condicion Tk_cpar eol? sentencias ;
 
 // Sentencias ciclo desde / hasta
 
-desde : Tk_desde Tk_id Tk_assig operacionMatematica Tk_hasta operacionMatematica
-       eol? Tk_okey eol? sentencias Tk_ckey; //TODO en la documentación menciona como poner el paso de incremento pero no encuentro un ejemplo pg 51
+desde : Tk_desde Tk_id Tk_assig operacionMatematica Tk_hasta operacionMatematica (Tk_paso Tk_num) // TODO la forma en que se da el paso es opcional, o por defecto es uno
+       eol? Tk_okey eol? sentencias Tk_ckey;
 
 //Sentencias de llamado de función
 
@@ -172,6 +175,7 @@ Tk_hasta : 'hasta';
 Tk_eval : 'eval';
 Tk_caso : 'caso';
 Tk_desde : 'desde';
+Tk_paso : 'paso';
 Tk_si: 'si';
 Tk_sino: 'sino';
 Tk_subrutina: 'subrutina';
@@ -204,6 +208,9 @@ Tk_cbracket : ']';
 Tk_num : [0-9]+('.'[0-9]+)?('e'[0-9]+('.'[0-9]+)?)?
         |[0-9]+('.'[0-9]+)?('E'[0-9]+('.'[0-9]+)?)?;
 Tk_str : '"'.*?'"'; // TODO falta agregar los de comilla sencilla
-Tk_id : [a-zA-Z_ñÑ][a-z0-9A-Z_ñÑ]* ('.' Tk_id)* ; // llamado a secciones de registros quedan como ID's TODO revisar si es correcto
+Tk_id : [a-zA-Z_ñÑ][a-z0-9A-Z_ñÑ]* ('.' Tk_id)* ; // llamado a secciones de registros quedan como ID's TODO revisar si es correcto / Testee la regla y todo okay
+/////////////////////////////       Comentarios      /////////////////////////////
+COMMENT 		: '/*' .*? '*/' -> skip ;
+LINE_COMMENT 	: '//' ~[\r\n]* -> skip ;
 EOL: [\r\n]+;
 WS : [ \t]+ -> skip;
