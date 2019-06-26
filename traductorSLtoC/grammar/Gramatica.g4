@@ -209,7 +209,7 @@ Tk_cbracket : ']';
 Tk_num : [0-9]+('.'[0-9]+)?('e'[0-9]+('.'[0-9]+)?)?
         |[0-9]+('.'[0-9]+)?('E'[0-9]+('.'[0-9]+)?)?;
 Tk_str : '"'.*?'"'; // TODO falta agregar los de comilla sencilla
-Tk_id : [a-zA-Z_ñÑ][a-z0-9A-Z_ñÑ]* (Tk_obracket Tk_num Tk_cbracket)* ('.' Tk_id)* ; // llamado a secciones de registros quedan como ID's TODO revisar si es correcto / Testee la regla y todo okay
+Tk_id : [-a-zA-Z_ñÑ][a-z0-9A-Z_ñÑ]* (Tk_obracket Tk_num Tk_cbracket)* ('.' Tk_id)* ; // llamado a secciones de registros quedan como ID's TODO revisar si es correcto / Testee la regla y todo okay
 /////////////////////////////       Comentarios      /////////////////////////////
 COMMENT 		: '/*' .*? '*/' -> skip ;
 LINE_COMMENT 	: '//' ~[\r\n]* -> skip ;

@@ -4,6 +4,8 @@ import java.io.*;
 
 public class Translator extends GramaticaBaseListener {
 
+	private int a = 0;
+
 	private static BufferedWriter out;
 
 	static {
@@ -29,6 +31,14 @@ public class Translator extends GramaticaBaseListener {
 			e.printStackTrace();
 		}
 	}
+
+	private void tab() {
+		for (int i = 0; i < a; i++) {
+			file("\t");
+		}
+
+	}
+
 
 
 	@Override
@@ -56,7 +66,9 @@ public class Translator extends GramaticaBaseListener {
 	public void enterCuerpo(GramaticaParser.CuerpoContext ctx) {
 
 		if (ctx.Tk_inicio() != null) {
+			tab();
 			file("int main() \n{\n");
+			a++;
 
 		}
 	}
@@ -65,6 +77,8 @@ public class Translator extends GramaticaBaseListener {
 	public void exitCuerpo(GramaticaParser.CuerpoContext ctx) {
 
 		if (ctx.Tk_fin() != null) {
+			a--;
+			tab();
 			file("\n}\n");
 
 		}
@@ -77,7 +91,7 @@ public class Translator extends GramaticaBaseListener {
 	//Variables
 	@Override
 	public void enterVariables_aux(GramaticaParser.Variables_auxContext ctx) {
-
+		tab();
 		if (ctx.tipo() != null) {
 			if (ctx.tipo().getChild(0) == ctx.tipo().Tk_numerico()) {
 				file("float ");
@@ -128,11 +142,16 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterRegistro(GramaticaParser.RegistroContext ctx) {
+		tab();
 		file(" {\n");
+		a++;
 	}
 
 	@Override
-	public void exitRegistro(GramaticaParser.RegistroContext ctx) {
+	public void exitRegistro(GramaticaParser.RegistroContext ctx)
+	{
+		a--;
+		tab();
 		file("}\n");
 	}
 
@@ -140,6 +159,7 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterConstants_aux(GramaticaParser.Constants_auxContext ctx) {
+		tab();
 		file("const ");
 
 		if(ctx.valor().getChild(0) == ctx.valor().verdad()){
@@ -186,6 +206,7 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterAsignacion(GramaticaParser.AsignacionContext ctx) {
+		tab();
 		if (ctx.Tk_id() != null) {
 			file(ctx.Tk_id().getText());
 
@@ -216,6 +237,7 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void exitAsignacion(GramaticaParser.AsignacionContext ctx) {
+
 		file(";\n");
 	}
 
@@ -223,40 +245,60 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterCondicional(GramaticaParser.CondicionalContext ctx) {
+		tab();
 		file("if ( ");
 		file(ctx.condicion().getText());
-		file(" ) \n{\n");
+		file(" ) \n");
+		tab();
+		file("{\n");
+		a++;
 
 	}
 	@Override
 	public void exitCondicional(GramaticaParser.CondicionalContext ctx) {
+		a--;
+		tab();
 		file("} \n ");
 	}
 
 	@Override
 	public void enterCondicionSinoSi(GramaticaParser.CondicionSinoSiContext ctx) {
+		a--;
+		tab();
 		file("}else if (");
 		file(ctx.condicion().getText());
-		file(") \n{\n");
+		file(") \n");
+		tab();
+		file("{\n");
+		a++;
 
 	}
 
 	@Override
 	public void enterCondicionSino(GramaticaParser.CondicionSinoContext ctx) {
-		file("}else\n{\n");
+		a--;
+		tab();
+		file("}else\n");
+		tab();
+		file("{\n");
+		a++;
 	}
 
 	//ciclo mientras (while)
 
 	@Override
 	public void enterCicloMientras(GramaticaParser.CicloMientrasContext ctx) {
+		tab();
 		file("while ( ");
 		file(ctx.condicion().getText());
 		file(" )\n{\n");
+		a++;
 	}
 
 	@Override
 	public void exitCicloMientras(GramaticaParser.CicloMientrasContext ctx) {
+		a--;
+		tab();
 		file("}\n");
 	}
 
@@ -264,11 +306,16 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterCicloRepetir(GramaticaParser.CicloRepetirContext ctx) {
+
+		tab();
 		file("do\n{\n");
+		a++;
 	}
 
 	@Override
 	public void exitCicloRepetir(GramaticaParser.CicloRepetirContext ctx) {
+		a--;
+		tab();
 		file("}\nwhile ( ");
 		file(ctx.condicion().getText());
 		file(" );");
@@ -287,15 +334,18 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterEvalAux(GramaticaParser.EvalAuxContext ctx) {
+		tab();
 		file("if (");
 		file(ctx.condicion().getText());
 		file(") \n{\n");
+		a++;
 	}
 
 	//ciclo desde hasta
 
 	@Override
 	public void enterDesde(GramaticaParser.DesdeContext ctx) {
+		tab();
 		file("for (");
 			file(ctx.Tk_id().getText());
 			file(" = ");
@@ -307,15 +357,23 @@ public class Translator extends GramaticaBaseListener {
 			if(ctx.Tk_paso() != null){
 				file(" ; i = i + ");
 				file(ctx.operacionMatematica(2).getText());
-				file(")\n{\n");
-			}else{
+				file(")\n");
+				tab();
+				file("{\n");
 
-				file(" ; i++)\n{\n");
+			}else{
+				file(" ; i++)\n");
+				tab();
+				file("{\n");
 			}
+			a++;
 		}
 	@Override
 	public void exitDesde(GramaticaParser.DesdeContext ctx) {
-		file("\n}\n");
+		a--;
+		file("\n");
+		tab();
+		file("}\n");
 	}
 
 	//llamado de funciones
@@ -323,6 +381,7 @@ public class Translator extends GramaticaBaseListener {
 	@Override
 	public void enterLlamada(GramaticaParser.LlamadaContext ctx) {
 		if(ctx.Tk_id().getText().equals("imprimir")){
+			tab();
 			file("cout");
 			for(GramaticaParser.TiposLLamadaContext i : ctx.tiposLLamada()){
 				file(" << ");
@@ -333,6 +392,7 @@ public class Translator extends GramaticaBaseListener {
 
 		}
 		if(ctx.Tk_id().getText().equals("leer")){
+			tab();
 			file("cin >> ");
 			file(ctx.tiposLLamada(0).getText());
 			file(";\n");
@@ -408,9 +468,11 @@ public class Translator extends GramaticaBaseListener {
 	@Override
 	public void enterSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx) {
 		file("{\n");
+		a++;
 	}
 	@Override
 	public void exitSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx) {
+		a--;
 		file("\n}\n");
 	}
 

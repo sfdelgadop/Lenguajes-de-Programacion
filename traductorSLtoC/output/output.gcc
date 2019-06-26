@@ -2,29 +2,29 @@
 float n,suma,k;
 int main() 
 {
-cout << "\nSuma de numeros pares entre 1 y n.\nPor favor " << "ingrese un valor para n: ";
-cin >> n;
-suma = 0;
-a = aslo(12,32);
-for (k = 2 ; k<n ; i = i + 2)
-{
-suma = suma+k;
+	cout << "\nSuma de numeros pares entre 1 y n.\nPor favor " << "ingrese un valor para n: ";
+	cin >> n;
+	suma = 0;
+	a = aslo(12,32);
+	for (k = 2 ; k<n ; i = i + 2)
+	{
+		suma = suma+k;
 
-}
-cout << "\nLa suma es " << suma;
-if ( a>b ) 
-{
-a = 2;
-}else if (a<4) 
-{
-a = 2+2;
-if ( 1<2 ) 
-{
-a = 3;
-}else
-{
-a = 2;
-} 
- } 
+	}
+	cout << "\nLa suma es " << suma;
+	if ( a>b ) 
+	{
+		a = 2;
+	}else if (a<4) 
+	{
+		a = 2+2;
+		if ( 1<2 ) 
+		{
+			a = 3;
+		}else
+		{
+			a = 2;
+		} 
+ 	} 
  
 }
