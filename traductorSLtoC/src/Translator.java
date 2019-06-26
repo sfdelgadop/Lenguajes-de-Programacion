@@ -207,6 +207,15 @@ public class Translator extends GramaticaBaseListener {
 	@Override
 	public void enterAsignacion(GramaticaParser.AsignacionContext ctx) {
 		tab();
+		/*if(ctx.asignacionAux().estruct() != null){
+			for(TerminalNode i : ctx.asignacionAux().estruct().valor().){
+				file(ctx.Tk_id().getText());
+				file(".push_back(");
+				file(ctx.asignacionAux().estruct().getText());
+				file(");");
+			}
+
+		}*/
 		if (ctx.Tk_id() != null) {
 			file(ctx.Tk_id().getText());
 
@@ -215,9 +224,11 @@ public class Translator extends GramaticaBaseListener {
 			file(" = ");
 
 		}
+		if(ctx.asignacionAux().estruct() != null){
+			file(ctx.asignacionAux().estruct().getText());
+		}
 		if(ctx.asignacionAux().getChild(0) == ctx.asignacionAux().llamada()){
 			file(ctx.asignacionAux().getChild(0).getText());
-
 		}
 		if(ctx.asignacionAux().valor() != null){
 			if(ctx.asignacionAux().valor().getChild(0) == ctx.asignacionAux().valor().verdad()){

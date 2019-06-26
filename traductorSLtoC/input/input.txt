@@ -2,12 +2,16 @@ programa uno
 
 var
   n, suma, k : numerico
+  A : vector [10] numerico
 inicio
   imprimir ("\nSuma de numeros pares entre 1 y n.\nPor favor ",
             "ingrese un valor para n: ")
   leer (n)
   suma = 0
   a = aslo(12,32)
+
+  A = {1,2,3}
+
   desde k=2 hasta n paso 2
   {
     suma = suma + k

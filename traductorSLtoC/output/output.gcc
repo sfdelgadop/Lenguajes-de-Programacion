@@ -1,11 +1,13 @@
 // program uno
 float n,suma,k;
+float A[10];
 int main() 
 {
 	cout << "\nSuma de numeros pares entre 1 y n.\nPor favor " << "ingrese un valor para n: ";
-	cin >> n;
+	cin >>  >> n;
 	suma = 0;
 	a = aslo(12,32);
+	A = {1,2,3};
 	for (k = 2 ; k<n ; i = i + 2)
 	{
 		suma = suma+k;

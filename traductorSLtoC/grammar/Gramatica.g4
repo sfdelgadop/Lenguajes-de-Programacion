@@ -59,7 +59,7 @@ asignacion : Tk_id Tk_assig asignacionAux;
 asignacionAux : llamada | valor |estruct|vector|matriz;
 estruct : Tk_okey valor (Tk_comma eol? estruct)* Tk_ckey
         | valor (Tk_comma eol? estruct)*
-        | Tk_okey estruct (Tk_comma estruct) Tk_ckey // TODO la forma esa rara para rellenar matrices y vectores
+        | Tk_okey estruct (Tk_comma estruct)* Tk_ckey // TODO la forma esa rara para rellenar matrices y vectores
         | Tk_okey valor Tk_ckey
         | Tk_okey Tk_ckey;
 
