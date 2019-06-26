@@ -124,12 +124,6 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEstruct(GramaticaParser.EstructContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GramaticaParser#estruct2}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEstruct2(GramaticaParser.Estruct2Context ctx);
-	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#condicional}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

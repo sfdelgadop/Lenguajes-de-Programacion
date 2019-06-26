@@ -243,18 +243,6 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEstruct2(GramaticaParser.Estruct2Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEstruct2(GramaticaParser.Estruct2Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCondicional(GramaticaParser.CondicionalContext ctx) { }
 	/**
 	 * {@inheritDoc}
