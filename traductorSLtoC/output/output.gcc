@@ -1,16 +1,35 @@
 // program uno
-float n,suma,k;
-float A[10];
 int main() 
 {
-	cout << "\nSuma de numeros pares entre 1 y n.\nPor favor " << "ingrese un valor para n: ";
-	cin >>  >> n;
-	suma = 0;
-	a = aslo(12,32);
-	A = {1,2,3};
-	for (k = 2 ; k<n ; i = i + 2)
+	const float PI = 3.141592654;
+	float v_disp,
+a_disp;
+	float a_disp_rad;
+	float h_max;
+	cin >>  >> v_disp >> a_disp;
+	a_disp_rad = a_disp*PI/180;
+	h_max = ((v_disp*sin(a_disp_rad))^2)/(2*9.8);
+	cout << "\n\nAltura maxima=" << h_max;
+	a = (b+c)*(b/y)+(y/c);
+	a = b+c;
+	n = a/y;
+	a = b-c%10+1;
+	y = v0y*t+1/2*-g*t^2;
+	y = (v0y*t)+((1/2)*(-g)*(t^2));
+	let = let[1];
+	if ( 1 > 2 ) {
+	}else if (let>="A"andlet<="Z") 
 	{
-		suma = suma+k;
+		msg = "letra may�scula";
+	}else if (let>="a"andlet<="z") 
+	{
+		msg = "letra min�scula";
+	}else if (let>="0"andlet<="9") 
+	{
+		msg = "d�gito";
+	}else
+	{
+		msg = "alg�n otro";
 
 	}
 	cout << "\nLa suma es " << suma;
@@ -29,4 +48,35 @@ int main()
 		} 
  	} 
  
+}
+bool pudo_abrirse_fuente ( )
+{
+	string nomb_fuente;
+	float p_archivo;
+	bool ok;
+	ok = NO;
+	if ( paramval(1)=="-d" ) 
+	{
+		mostrar_inst = SI;
+		p_archivo = 2;
+	}else
+	{
+		mostrar_inst = NO;
+		p_archivo = 1;
+	} 
+ 	if ( pcount()<p_archivo ) 
+	{
+		cout << "\nFalta especificar archivo fuente MicroL";
+	}else
+	{
+		nomb_fuente = paramval(p_archivo);
+		ok = set_stdin(nomb_fuente);
+		if ( not<2 ) 
+		{
+			cout << "\nNo pudo abrirse archivo " << nomb_fuente;
+			ok = NO;
+		} 
+ 	} 
+ 	return ok ;
+
 }

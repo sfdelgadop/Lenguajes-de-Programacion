@@ -2,7 +2,7 @@
 
 grammar Gramatica;
 
-s : eol* programa? declaraciones* cuerpo subRutinas? ; //inicio de la gramatica
+s : eol* programa? declaraciones* cuerpo eol* subRutinas* ; //inicio de la gramatica
 
 programa : Tk_programa Tk_id eol*;
 
@@ -45,18 +45,18 @@ cuerpo: Tk_inicio eol sentencias* Tk_fin;
 
 ////////////////////////////       Sentencias         ///////////////////////////////////
 
-sentencias: asignacion eol
-           |condicional eol
-           |cicloMientras eol
-           |cicloRepetir eol
-           |eval eol
-           |desde eol
-           |llamada eol;
+sentencias: asignacion eol*
+           |condicional eol*
+           |cicloMientras eol*
+           |cicloRepetir eol*
+           |eval eol*
+           |desde eol*
+           |llamada eol*;
 
 // Sentencias de asignación
 
 asignacion : Tk_id Tk_assig asignacionAux;
-asignacionAux : llamada | valor |estruct|vector|matriz;
+asignacionAux : valor| llamada  |estruct|vector|matriz;
 estruct : Tk_okey valor (Tk_comma eol? estruct)* Tk_ckey
         | valor (Tk_comma eol? estruct)*
         | Tk_okey estruct (Tk_comma estruct)* Tk_ckey // TODO la forma esa rara para rellenar matrices y vectores
@@ -103,7 +103,7 @@ subRutinas: Tk_subrutina Tk_id Tk_opar subParamatros* Tk_cpar (Tk_retorna tipo)?
 
 subRutinasDeclar: declaraciones* eol? subRutinasAux;
 
-subRutinasAux : Tk_inicio eol sentencias? retorna? eol? Tk_fin ;
+subRutinasAux : Tk_inicio eol sentencias* retorna? eol? Tk_fin ;
 
 retorna: Tk_retorna Tk_opar retornaAux Tk_cpar ;
 

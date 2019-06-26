@@ -1,22 +1,40 @@
 programa uno
 
+const
+  PI = 3.141592654
 var
-  n, suma, k : numerico
+  v_disp, // Velocidad inicial
+  a_disp : numerico // Angulo de disparo
+  a_disp_rad : numerico // Igual que a_disp pero en radianes
+  h_max : numerico // Altura maxima
   A : vector [10] numerico
+
 inicio
-  imprimir ("\nSuma de numeros pares entre 1 y n.\nPor favor ",
-            "ingrese un valor para n: ")
-  leer (n)
-  suma = 0
-  a = aslo(12,32)
+  leer (v_disp, a_disp)
+  a_disp_rad = a_disp * PI / 180
+  h_max = ( (v_disp * sin (a_disp_rad) ) ^ 2 ) / (2 * 9.8)
+  imprimir ("\n\nAltura maxima=", h_max)
+  a = (b + c) * (b / y) + (y / c)		// Sentencia v�lida a nivel sint�ctico
+  a = b + c; n = a / y	// Estas tambi�n, separadas por ;
+  a = b - c % 10 + 1
+  y = v0y * t + 1/2 * -g * t^2 // sin parentesis
+  y = (v0y * t) + ( (1/2)*(-g)*(t^2) )
 
-  A = {1,2,3}
+  A = {1,2,3,4,5,6,7,8,9,10}
 
-  desde k=2 hasta n paso 2
+  let = let [1]
+  eval
   {
-    suma = suma + k
+    caso ( let >= "A" and let <= "Z" )
+      msg = "letra may�scula"
+    caso ( let >= "a" and let <= "z" )
+      msg = "letra min�scula"
+    caso ( let >= "0" and let <= "9" )
+      msg = "d�gito"
+    sino
+      msg = "alg�n otro"
   }
-  imprimir ("\nLa suma es ", suma)
+imprimir ("\nLa suma es ", suma)
 
     si (a>b)
     {
@@ -30,4 +48,34 @@ inicio
         }
     }
 
+fin
+subrutina pudo_abrirse_fuente() retorna logico
+var
+nomb_fuente : cadena
+p_archivo : numerico
+ok : logico
+inicio
+ok = NO
+si ( paramval (1) == "-d" )
+{
+mostrar_inst = SI
+p_archivo = 2
+sino
+mostrar_inst = NO
+p_archivo = 1
+}
+
+si ( pcount() < p_archivo )
+{
+imprimir ("\nFalta especificar archivo fuente MicroL")
+sino
+nomb_fuente = paramval (p_archivo)
+ok = set_stdin (nomb_fuente)
+si ( not < 2 )
+{
+imprimir ("\nNo pudo abrirse archivo ", nomb_fuente)
+ok = NO
+}
+}
+retorna ( ok )
 fin
