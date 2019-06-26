@@ -334,7 +334,11 @@ public class Translator extends GramaticaBaseListener {
 		}
 		if(ctx.Tk_id().getText().equals("leer")){
 			file("cin >> ");
-			file(ctx.tiposLLamada(0).getText());
+			for(GramaticaParser.TiposLLamadaContext i : ctx.tiposLLamada()){
+				file(" >> ");
+
+				file(i.getText());
+			}
 			file(";\n");
 
 		}
