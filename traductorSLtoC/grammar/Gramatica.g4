@@ -57,8 +57,8 @@ sentencias: asignacion eol
 
 asignacion : Tk_id Tk_assig asignacionAux;
 asignacionAux : llamada | valor |estruct|vector|matriz;
-estruct : Tk_okey valor (Tk_comma estruct)? Tk_ckey
-        | valor (Tk_comma estruct)?
+estruct : Tk_okey valor (Tk_comma eol? estruct)* Tk_ckey
+        | valor (Tk_comma eol? estruct)*
         | Tk_okey estruct (Tk_comma estruct) Tk_ckey // TODO la forma esa rara para rellenar matrices y vectores
         | Tk_okey valor Tk_ckey
         | Tk_okey Tk_ckey;
@@ -143,7 +143,7 @@ auxNum : Tk_id | Tk_num | llamada | vector | matriz;
 condicion : auxLog relacional auxLog (condicionAux condicion)?; //TODO lo de los parentesis x2
 condicionAux : Tk_or | Tk_and; //TODO pensar en qué hacer con la negación
 relacional : Tk_less | Tk_equal | Tk_lessEqual | Tk_bigger | Tk_biggerEqual | Tk_diferent;
-auxLog : Tk_id | Tk_num | llamada | verdad | Tk_str | vector;  //TODO --- TRUE < TRUE?
+auxLog : Tk_id | Tk_num | llamada | verdad | Tk_str | vector;  //TODO --- TRUE < TRUE? como quitar esa comparación
 
 
 // Estructuras

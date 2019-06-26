@@ -22,6 +22,8 @@ public class Main {
 			ParseTreeWalker walker = new ParseTreeWalker();
 			// Walk the tree created during the parse, trigger callbacks
 
+
+
 			walker.walk(new Translator(), tree);
 			System.out.println(); // print a \n after translation
 
