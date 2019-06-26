@@ -48,30 +48,23 @@ public class Translator extends GramaticaBaseListener {
 
 	//////////////////////////////////////    estructura del programa principal    /////////////////////////////////////////////////
 	@Override
-	public void enterPrograma(GramaticaParser.ProgramaContext ctx) {
 
-		if (ctx.Tk_programa() != null) {
+	public void enterS(GramaticaParser.SContext ctx)
+	{
+		if(ctx.programa() != null){
 			file("// program ");
-
-		}
-
-		if (ctx.Tk_id() != null) {
-			file(ctx.Tk_id().getText());
+			file(ctx.programa().Tk_id().getText());
 			file("\n");
-
 		}
-	}
 
-	@Override
-	public void enterCuerpo(GramaticaParser.CuerpoContext ctx) {
-
-		if (ctx.Tk_inicio() != null) {
+		if (ctx.cuerpo().Tk_inicio() != null){
 			tab();
 			file("int main() \n{\n");
 			a++;
 
 		}
 	}
+
 
 	@Override
 	public void exitCuerpo(GramaticaParser.CuerpoContext ctx) {
@@ -326,18 +319,27 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterEval(GramaticaParser.EvalContext ctx) {
+		tab();
+		file("if ( 1 > 2 ) {\n");
+		a++;
 	}//falta el Break
 	@Override
 	public void exitEval(GramaticaParser.EvalContext ctx) {
-		file("\n}\n");
+		a--;
+		file("\n");
+		tab();
+		file("}\n");
 	}
 
 	@Override
 	public void enterEvalAux(GramaticaParser.EvalAuxContext ctx) {
+		a--;
 		tab();
-		file("if (");
+		file("}else if (");
 		file(ctx.condicion().getText());
-		file(") \n{\n");
+		file(") \n");
+		tab();
+		file("{\n");
 		a++;
 	}
 
@@ -415,7 +417,6 @@ public class Translator extends GramaticaBaseListener {
 	@Override
 	public void enterSubRutinas(GramaticaParser.SubRutinasContext ctx) {
 		if(ctx.tipo() != null){
-			file(ctx.tipo().getText());
 			if(ctx.tipo().Tk_logico() == ctx.tipo().getChild(0)){
 				file("bool ");
 			}
@@ -466,13 +467,14 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterSubRutinasDeclar(GramaticaParser.SubRutinasDeclarContext ctx) {
+
 		file(")\n");
+		file("{\n");
+		a++;
 	}
 
 	@Override
 	public void enterSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx) {
-		file("{\n");
-		a++;
 	}
 	@Override
 	public void exitSubRutinasAux(GramaticaParser.SubRutinasAuxContext ctx) {
@@ -482,6 +484,7 @@ public class Translator extends GramaticaBaseListener {
 
 	@Override
 	public void enterRetorna(GramaticaParser.RetornaContext ctx) {
+		tab();
 		file("return ");
 		if(ctx.retornaAux().getChild(0) == ctx.retornaAux().verdad()){
 			if(ctx.retornaAux().getText().equals("TRUE")){
@@ -496,9 +499,5 @@ public class Translator extends GramaticaBaseListener {
 		file(" ;\n");
 
 	}
-
-/////////////////////////////////////// no se como llamar esta sección 2.0 //////////////////////////////////////////////////
-// por ahora vacía
-
 
 }
